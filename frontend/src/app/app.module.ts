@@ -1,11 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MdToolbarModule } from '@angular/material';
+import { MdToolbarModule, MdCardModule, MatListModule, MatRadioModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
 
 import { TestService } from './test/test.service';
+
+const routes = [
+  // { path: '', redirectTo: '/test', pathMatch: 'full' },
+  { path: 'test', component: TestComponent }
+];
 
 @NgModule({
   declarations: [
@@ -13,8 +19,12 @@ import { TestService } from './test/test.service';
     TestComponent
   ],
   imports: [
+    RouterModule.forRoot(routes),
     BrowserModule,
-    MdToolbarModule
+    MdToolbarModule,
+    MdCardModule,
+    MatListModule,
+    MatRadioModule
   ],
   providers: [TestService],
   bootstrap: [AppComponent]
