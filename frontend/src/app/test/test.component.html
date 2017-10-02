@@ -1,1 +1,10 @@
-asdasd
+<div *ngIf="tasks.length > 0" class="test-container">
+    <div *ngFor="let task of tasks" class="test-wrap">
+        <h2 class="question">{{ task.question }}</h2>
+        <ul *ngIf="task.answers.length > 0" class="answers">
+            <li *ngFor="let answer of task.answers">
+                {{ answer }}
+            </li>
+        </ul>
+    </div>
+</div>
