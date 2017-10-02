@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
 
 import { TestService } from './test/test.service';
+import { AuthComponent } from './auth/auth.component';
 
 const routes = [
   // { path: '', redirectTo: '/test', pathMatch: 'full' },
@@ -16,7 +17,8 @@ const routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent
+    TestComponent,
+    AuthComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
