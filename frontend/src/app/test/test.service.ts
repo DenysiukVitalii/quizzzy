@@ -16,7 +16,7 @@ const tasks = [
     'id': 1,
     'question': 'It was Sunday on Jan 1, 2006. What was the day of the week Jan 1, 2010?',
     'answers': ['Sunday', 'Saturday', 'Friday', 'Wednesday'],
-    'right_answers': [2]
+    'right_answers': [2, 1]
   },
   {
     'id': 2,
@@ -28,7 +28,7 @@ const tasks = [
     'id': 3,
     'question': 'At a game of billiards, A can give B 15 points in 60. How many points can B give C in a game of 90?',
     'answers': ['30 points', '20 points', '10 points', '12 points'],
-    'right_answers': [2]
+    'right_answers': [2, 0]
   },
   {
     'id': 4,

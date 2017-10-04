@@ -1,32 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MdToolbarModule, MdCardModule, MatListModule, MatRadioModule } from '@angular/material';
-import { RouterModule } from '@angular/router';
+
+import { SharedModule } from './shared/shared.module';
+import { AppRoutingModule, routingComponents } from './app.routing';
 
 import { AppComponent } from './app.component';
-import { TestComponent } from './test/test.component';
-
-import { TestService } from './test/test.service';
 import { AuthComponent } from './auth/auth.component';
 
-const routes = [
-  // { path: '', redirectTo: '/test', pathMatch: 'full' },
-  { path: 'test', component: TestComponent }
-];
+import { TestService } from './test/test.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
-    AuthComponent
+    AuthComponent,
+    routingComponents
   ],
   imports: [
-    RouterModule.forRoot(routes),
     BrowserModule,
-    MdToolbarModule,
-    MdCardModule,
-    MatListModule,
-    MatRadioModule
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [TestService],
   bootstrap: [AppComponent]
