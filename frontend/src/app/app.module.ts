@@ -8,6 +8,7 @@ import { TestComponent } from './test/test.component';
 
 import { TestService } from './test/test.service';
 import { AuthComponent } from './auth/auth.component';
+import { SignupComponent } from './signup/signup.component';
 
 const routes = [
   // { path: '', redirectTo: '/test', pathMatch: 'full' },
@@ -18,7 +19,8 @@ const routes = [
   declarations: [
     AppComponent,
     TestComponent,
-    AuthComponent
+    AuthComponent,
+    SignupComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
