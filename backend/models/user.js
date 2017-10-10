@@ -17,7 +17,7 @@ module.exports.findAll = function() {
             if (err) {
                 return resolve(err);
             }
-            resolve(rows[0]);
+            resolve(rows);
         });
     })
 }
