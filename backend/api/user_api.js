@@ -23,11 +23,34 @@ app.get('/', function(req, res) {
 });
 
 
-app.post('/authenticate', async function(req, res, next) {
+app.post('/login', async function(req, res, next) {
+    res.setHeader('Content-Type', 'application/json');
     let params = req.body;
     let users = null;
     users = await user.findAll();
-    console.log(users); // Ok, data is here
+    console.log(params); // Ok, data is here
+
+    let filteredUsers = users.filter(user => {
+        return user.username === params.username &&
+            user.password === params.password &&
+            user.role === params.role;
+    });
+
+    if (filteredUsers.length) {
+        // if login details are valid return 200 OK with user details and fake jwt token
+        let user = filteredUsers[0];
+        res.json({
+            id: user.id,
+            username: user.username,
+            role: user.role,
+            token: 'fake-jwt-token'
+        });
+
+    } else {
+        // else return 400 bad request
+        res.statusMessage = "Username or password or role is incorrect";
+        res.status(400).end();
+    }
 });
 
 

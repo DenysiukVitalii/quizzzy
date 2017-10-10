@@ -18,6 +18,7 @@ import { AlertService, AuthenticationService, UserService } from './_services/in
 import { TestComponent, TestService } from './test/index';
 import { LoginComponent } from './login/index';
 import { SignupComponent } from './signup/index';
+import { TeacherComponent } from './teacher/teacher.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SignupComponent } from './signup/index';
     AlertComponent,
     TestComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    TeacherComponent
   ],
   imports: [
     BrowserModule,
