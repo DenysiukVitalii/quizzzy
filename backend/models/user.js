@@ -41,6 +41,10 @@ module.exports.encrypt = function(data, callback) {
     })
 }
 
+module.exports.compare = function(hash, password, callback) {
+    return (bcrypt.compareSync(password, hash)) ? true : false;
+}
+
 module.exports.sendResponse = function(success, res) {
     if (success) {
         res.send({ 'success': 'true' });
