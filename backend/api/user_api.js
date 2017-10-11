@@ -30,10 +30,10 @@ app.post('/login', async function(req, res, next) {
     users = await user.findAll();
     console.log(params); // Ok, data is here
 
-    let filteredUsers = users.filter(user => {
-        return user.username === params.username &&
-            user.password === params.password &&
-            user.role === params.role;
+    let filteredUsers = users.filter(u => {
+        return u.username === params.username &&
+            user.compare(u.password, params.password) &&
+            u.role === params.role;
     });
 
     if (filteredUsers.length) {
@@ -51,6 +51,30 @@ app.post('/login', async function(req, res, next) {
         res.statusMessage = "Username or password or role is incorrect";
         res.status(400).end();
     }
+});
+
+app.post('/signup', async function(req, res, next) {
+    let newUser = req.body;
+    console.log(newUser);
+    let users = null;
+    users = await user.findAll();
+
+    let duplicateUser = users.filter(user => { return user.username === newUser.username; }).length;
+    if (duplicateUser) {
+        res.statusMessage = 'Username "' + newUser.username + '" is already taken';
+        res.status(400).end();
+    }
+
+    //newUser.id = users.length + 1;
+    console.log(newUser);
+    user.encrypt(newUser, function(err, hash) {
+        newUser.password = hash;
+        user.addUser(newUser, function(err, info) {
+            if (err) throw err;
+            console.log(info);
+            user.sendResponse(true, res);
+        })
+    });
 });
 
 
