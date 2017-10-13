@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { MdToolbarModule, MdCardModule, MatListModule, MatRadioModule } from '@angular/material';
+import { MatToolbarModule, MatCardModule, MatListModule, MatRadioModule } from '@angular/material';
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -34,8 +34,8 @@ import { TeacherComponent } from './teacher/teacher.component';
     FormsModule,
     HttpModule,
     routing,
-    MdToolbarModule,
-    MdCardModule,
+    MatToolbarModule,
+    MatCardModule,
     MatListModule,
     MatRadioModule
   ],

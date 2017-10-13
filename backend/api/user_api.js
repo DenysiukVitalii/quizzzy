@@ -58,6 +58,8 @@ app.post('/signup', async function(req, res, next) {
     console.log(newUser);
     let users = null;
     users = await user.findAll();
+    
+    console.log(users);
 
     let duplicateUser = users.filter(user => { return user.username === newUser.username; }).length;
     if (duplicateUser) {
