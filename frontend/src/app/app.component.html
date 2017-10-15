@@ -1,9 +1,10 @@
 <md-toolbar color="primary">
-    <p>Quizzzy</p>
-    <!-- <a routerLink="/test">-></a> -->
-    
-</md-toolbar>
-<button md-button color="accent" routerLink="test">Pass the test</button>
-
-<router-outlet></router-outlet>
-
+    Quizzy</md-toolbar>
+<div class="jumbotron">
+    <div class="container">
+        <div class="col-sm-8 col-sm-offset-2">
+            <alert></alert>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

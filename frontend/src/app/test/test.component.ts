@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { TestService } from './test.service';
 
@@ -11,9 +12,11 @@ export class TestComponent implements OnInit {
 
   tasks = [];
 
-  constructor(private testService: TestService) { }
+  constructor(private router: Router, private testService: TestService) { }
 
   ngOnInit() {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser.role != 'student') this.router.navigate(['/teacher']);
     this.tasks = this.testService.getTasks();
   }
 

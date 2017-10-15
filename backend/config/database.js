@@ -5,6 +5,6 @@ module.exports = {
         'user': 'root',
         'password': '1111'
     },
-		'database': 'my_schema',
+    'database': 'quizzzyDB',
     'users_table': 'users'
 };
