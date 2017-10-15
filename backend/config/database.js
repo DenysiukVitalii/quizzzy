@@ -3,7 +3,7 @@ module.exports = {
     'connection': {
         'host': 'localhost',
         'user': 'root',
-        'password': '1111'
+        'password': 'root'
     },
     'database': 'quizzzyDB',
     'users_table': 'users'
