@@ -15,8 +15,12 @@ export class TestComponent implements OnInit {
   constructor(private router: Router, private testService: TestService) { }
 
   ngOnInit() {
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser.role != 'student') this.router.navigate(['/teacher']);
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    if (currentUser.role !== 'student') {
+      this.router.navigate(['/teacher']);
+    }
+
     this.tasks = this.testService.getTasks();
   }
 

@@ -1,36 +1,9 @@
-<a routerLink="/"><-</a>
-<div
-    *ngIf="tasks.length > 0"
-    class="test-container">
-    <md-card
-        *ngFor="let task of tasks"
-        class="test-wrap">
-        <h2 class="question">{{ task.question }}</h2>
-        <md-radio-group *ngIf="task.answers.length > 0" class="answers">
-            <!-- If question has more than 1 right answer -->
-            <div class="answer-wrap" *ngIf="task.right_answers.length >= 2">
-                <md-checkbox 
-                    class="answer"              
-                    *ngFor="let answer of task.answers"
-                    value="{{ answer }}">
-                    {{ answer }}
-                </md-checkbox>
-            </div>
-            <!-- If question has only 1 right answer -->
-            <div class="answer-wrap" *ngIf="task.right_answers.length < 2">
-                <md-radio-button 
-                    class="answer"              
-                    *ngFor="let answer of task.answers"
-                    value="{{ answer }}">
-                    {{ answer }}
-                </md-radio-button>
-            </div>
 <p><a [routerLink]="['/login']">Logout</a></p>
 <div *ngIf="tasks.length > 0" class="test-container">
     <md-card *ngFor="let task of tasks" class="test-wrap">
         <h2 class="question">{{ task.question }}</h2>
         <md-radio-group *ngIf="task.answers.length > 0" class="answers">
-            <md-radio-button class="answer" *ngFor="let answer of task.answers" value="{{ answer }}">
+            <md-radio-button class="answer" *ngFor="let answer of task.answers">
                 {{ answer }}
             </md-radio-button>
         </md-radio-group>
