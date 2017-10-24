@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { TeacherModule } from './teacher/teacher.module';
 
 import { SharedModule } from './shared/shared.module';
-// import { MatToolbarModule, MatCardModule, MatListModule, MatRadioModule } from '@angular/material';
+
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -19,7 +20,6 @@ import { AlertService, AuthenticationService, UserService } from './_services/in
 import { TestComponent, TestService } from './test/index';
 import { LoginComponent } from './login/index';
 import { SignupComponent } from './signup/index';
-import { TeacherComponent } from './teacher/teacher.component';
 import { TeacherPipe } from './_pipes/teacher.pipe';
 
 @NgModule({
@@ -29,8 +29,7 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     TestComponent,
     LoginComponent,
     SignupComponent,
-    TeacherComponent,
-    TeacherPipe
+    TeacherPipe,
   ],
   imports: [
     BrowserModule,
@@ -38,10 +37,7 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     HttpModule,
     routing,
     SharedModule,
-    // MatListModule,
-    // MatRadioModule,
-    // MatCardModule,
-    // MatToolbarModule
+    TeacherModule,
   ],
   providers: [
     TestService,

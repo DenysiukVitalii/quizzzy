@@ -22,7 +22,6 @@ module.exports.findAll = function() {
     })
 }
 
-
 module.exports.addUser = function(data, callback) {
     connection.query("INSERT INTO users SET ?", data, callback);
 }
