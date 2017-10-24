@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { SharedModule } from './shared/shared.module';
-// import { MatToolbarModule, MatCardModule, MatListModule, MatRadioModule } from '@angular/material';
+import { NoConflictStyleCompatibilityMode } from '@angular/material';
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -38,10 +38,7 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     HttpModule,
     routing,
     SharedModule,
-    // MatListModule,
-    // MatRadioModule,
-    // MatCardModule,
-    // MatToolbarModule
+    NoConflictStyleCompatibilityMode
   ],
   providers: [
     TestService,
