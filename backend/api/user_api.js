@@ -28,6 +28,7 @@ app.post('/login', async function(req, res, next) {
     let params = req.body;
     let users = null;
     users = await user.findAll();
+
     console.log(params); // Ok, data is here
 
     let filteredUsers = users.filter(u => {
