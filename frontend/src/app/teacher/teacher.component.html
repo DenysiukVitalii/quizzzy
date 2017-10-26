@@ -1,57 +1,12 @@
 <p><a [routerLink]="['/login']">Logout</a></p>
 <h2 class="welcome">Teacher Name</h2>
 <div class="controls">
-    <button mat-raised-button color="accent">Create test</button>
-    <button [routerLink]="['/students']" mat-raised-button color="primary">Students</button>
-    <button [routerLink]="['/questions']" mat-raised-button color="primary">Questions</button>
-</div>
-<div class="mat-elevation-z8">
-    <div class="input-wrap-header">
-      <mat-form-field floatPlaceholder="never" class="input-wrap">
-        <input matInput #filter placeholder="Filter tests">
-      </mat-form-field>
+    <div class="nav-controls">
+        <button [routerLink]="['tests']" mat-raised-button color="primary">Tests</button>
+        <button [routerLink]="['students']" mat-raised-button color="primary">Students</button>
+        <button [routerLink]="['questions']" mat-raised-button color="primary">Questions</button>
     </div>
-  
-    <mat-table #table [dataSource]="dataSource">
-  
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-  
-      <!-- ID Column -->
-      <ng-container matColumnDef="testId">
-        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
-      </ng-container>
-  
-      <!-- Progress Column -->
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-      </ng-container>
-  
-      <!-- Name Column -->
-      <ng-container matColumnDef="subject">
-        <mat-header-cell *matHeaderCellDef> Subject </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.subject}} </mat-cell>
-      </ng-container>
-  
-      <!-- Color Column -->
-      <ng-container matColumnDef="theme">
-        <mat-header-cell *matHeaderCellDef> Theme </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.theme}} </mat-cell>
-      </ng-container>
-  
-      <ng-container matColumnDef="createdDate">
-        <mat-header-cell *matHeaderCellDef> Created Date </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.createdDate}} </mat-cell>
-      </ng-container>
+    <button class="create-test-btn" mat-raised-button color="accent" (click)="openDialog()">Create test</button>
+</div>
 
-      <ng-container matColumnDef="passingsCount">
-        <mat-header-cell *matHeaderCellDef> Passings Count </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.passingCount}} </mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-  </div>
+<router-outlet></router-outlet>

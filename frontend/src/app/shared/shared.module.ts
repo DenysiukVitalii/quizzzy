@@ -9,7 +9,8 @@ import { MatToolbarModule,
          MatCheckboxModule,
          MatButtonModule,
          MatTableModule,
-         MatInputModule
+         MatInputModule,
+         MatDialogModule
         } from '@angular/material';
 
 @NgModule({
@@ -22,7 +23,8 @@ import { MatToolbarModule,
     MatButtonModule,
     MatTableModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule,
   ],
   declarations: [],
   exports: [
@@ -34,7 +36,8 @@ import { MatToolbarModule,
     MatButtonModule,
     MatTableModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule,
   ]
 })
 export class SharedModule { }

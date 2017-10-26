@@ -37,11 +37,8 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     HttpModule,
     routing,
     SharedModule,
-<<<<<<< HEAD
-    TeacherModule,
-=======
-    NoConflictStyleCompatibilityMode
->>>>>>> vitalii-branch
+    NoConflictStyleCompatibilityMode,
+    TeacherModule
   ],
   providers: [
     TestService,
