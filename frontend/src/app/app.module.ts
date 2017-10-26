@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { TeacherModule } from './teacher/teacher.module';
 
 import { SharedModule } from './shared/shared.module';
-
+import { NoConflictStyleCompatibilityMode } from '@angular/material';
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -37,7 +37,11 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     HttpModule,
     routing,
     SharedModule,
+<<<<<<< HEAD
     TeacherModule,
+=======
+    NoConflictStyleCompatibilityMode
+>>>>>>> vitalii-branch
   ],
   providers: [
     TestService,
