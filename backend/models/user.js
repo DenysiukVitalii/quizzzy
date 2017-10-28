@@ -45,6 +45,28 @@ module.exports.compare = function(hash, password, callback) {
     return (bcrypt.compareSync(password, hash)) ? true : false;
 }
 
+module.exports.getTasks = () => {
+    return new Promise((resolve, reject) => {
+        connection.query(`select json_object(
+            'id',  questions.id,
+            'question', question,
+            'answers', json_array(
+                               (select GROUP_CONCAT(
+                               "\`", 
+                                          json_object('answer',answer,'isTrue', isTrue), "\`"
+                                       )   
+                                from answers 
+                                where answers.id_question = questions.id))
+                             ) as tasks
+           from questions;`, (err, rows, fields) => {
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
 module.exports.sendResponse = function(success, res) {
     if (success) {
         res.send({ 'success': 'true' });
