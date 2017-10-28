@@ -110,5 +110,22 @@ app.delete('/deluser/:id', function(req, res, next) {
     });
 });
 
+app.get('/get_tasks', async(req, res) => {
+    let tasks = await admin.getTasks();
+    tasks = tasks.map(el => JSON.parse(el.tasks));
+    console.log(tasks);
+    tasks = tasks.map(el => {
+        let answers = el.answers;
+        answers = answers[0];
+        answers = answers.slice(1,-1);
+        answers = answers.split('`,`');
+        answers = '{"answers":['.concat(answers, "]}");
+        el.answers = JSON.parse(answers).answers;
+        return el;
+    });
+    console.log(tasks);
+    res.json(tasks);
+});
+
 
 module.exports = app;
