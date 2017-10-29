@@ -67,6 +67,33 @@ module.exports.getTasks = () => {
     });
 }
 
+module.exports.getDisc = () => {
+    return new Promise((resolve, reject) => {
+        connection.query(`SELECT * FROM disciplines ORDER BY id ASC`, (err, rows, fields) => {
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
+module.exports.addDiscipline = function(data, callback) {
+    connection.query("INSERT INTO disciplines SET ?", data, callback);
+}
+
+module.exports.deleteDiscipline = function(idDisc, callback) {
+    connection.query(`DELETE FROM disciplines WHERE id = ${idDisc}`, callback);
+}
+
+module.exports.editDiscipline = function(data, callback) {
+    connection.query(`UPDATE disciplines SET name = '${data.name}' WHERE id = ${data.id}`, callback);
+}
+
+module.exports.findByDiscipline = function(name, callback) {
+    connection.query(`SELECT * FROM disciplines WHERE name = '${name}'`, callback);
+}
+
 module.exports.sendResponse = function(success, res) {
     if (success) {
         res.send({ 'success': 'true' });

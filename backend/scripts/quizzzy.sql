@@ -69,15 +69,29 @@ group by question;
 
 create table disciplines (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-    name longtext NOT NULL,
-    unique(id)
+    name varchar(60) NOT NULL,
+    unique(id),
+    unique(name)
 );
+insert into disciplines (name) values
+('Human mood'),
+('Different questions');
+select * from disciplines; 
 
 create table topics (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY , 
     id_discipline INT NOT NULL,
     name varchar(60) NOT NULL,
     FOREIGN KEY (id_discipline) REFERENCES disciplines(id),
-    unique(id)
+    unique(id),
+    unique(name)
 );
 
+insert into topics (id_discipline, name) values
+(1, 'In meeting'),
+(1, 'In room'),
+(2, 'In street');
+
+select topics.id, disciplines.name as 'discipline', topics.name as 'topic'
+from topics
+join disciplines on topics.id_discipline = disciplines.id;
