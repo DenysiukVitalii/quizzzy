@@ -95,3 +95,13 @@ insert into topics (id_discipline, name) values
 select topics.id, disciplines.name as 'discipline', topics.name as 'topic'
 from topics
 join disciplines on topics.id_discipline = disciplines.id;
+
+select topics.id, topics.name as 'topic'
+from topics
+join disciplines on topics.id_discipline = disciplines.id
+where disciplines.id = 1
+order by topics.id asc;
+
+select disciplines.name as discipline, count(topics.id) as amount_topics from disciplines
+join topics on topics.id_discipline = disciplines.id
+group by disciplines.name;

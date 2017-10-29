@@ -178,5 +178,64 @@ app.put('/edit_disc', (req, res) => {
     });
 });
 
+app.get('/get_topics', async(req, res) => {
+    let topics = await admin.getTopics();
+    console.log(topics);
+    res.json(topics);
+});
+
+app.post('/topics_by_disc', async(req, res) => {
+    let data = req.body;
+    console.log(data);
+    let tasks = await admin.getTopics(data.id_discipline);
+    console.log(tasks);
+    res.json(tasks);
+})
+
+app.post('/create_topic', (req, res) => {
+    var data = req.body;
+    console.log(data);
+    admin.findByTopic(data.name, function(err, rows, fields) {
+        if (rows.length == 1) {
+            admin.sendResponse(false, res);
+        } else {
+            admin.addTopic(data, function(err, info) {
+                if (err) throw err;
+                console.log(info);
+                admin.sendResponse(true, res);
+            });
+        };
+    });
+});
+
+app.delete('/delete_topic', (req, res, next) => {
+    var data = req.body;
+    console.log(data.id);
+    admin.deleteTopic(data.id, function(err, info) {
+        if (err) {
+            next(err);
+            return res.send({ 'success': 'false' });
+        }
+        console.log(info);
+        admin.sendResponse(true, res);
+    });
+});
+
+app.put('/edit_topic', (req, res) => {
+    var data = req.body;
+    console.log(data);
+    admin.findByTopic(data.name, function(err, rows, fields) {
+        if (rows.length == 1) {
+            admin.sendResponse(false, res);
+        } else {
+            admin.editTopic(data, function(err, info) {
+                if (err) throw err;
+                console.log(info);
+                admin.sendResponse(true, res);
+            });
+        };
+    });
+});
+
 
 module.exports = app;
