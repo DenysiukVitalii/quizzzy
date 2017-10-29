@@ -16,57 +16,6 @@ ALTER TABLE users CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE users DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
-create table questions (
-	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-    question longtext NOT NULL,
-    unique(id)
-);
-
-insert into questions (question) values 
-('How are you?'),
-('Do you speak English?');
-
-select * from answers;
-
-create table answers (
-	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY , 
-    id_question INT NOT NULL,
-    answer longtext NOT NULL,
-    isTrue INT NOT NULL,
-    FOREIGN KEY (id_question) REFERENCES questions(id),
-    unique(id)
-);
-
-insert into answers (id_question, answer, isTrue) values
-(1, 'Good', 1),
-(1, 'Bad', 0),
-(1, 'I\'m fine', 0),
-(2, 'Yes, I do', 1),
-(2, 'No, I don\'t', 0);
-
-select json_object(
-  'id',  questions.id,
-  'question', question,
-  'answers', json_array(
-                     (select GROUP_CONCAT('\`', 
-								json_object('answer',answer, 'isTrue', isTrue), '\`'
-                             )   
-                      from answers 
-                      where answers.id_question = questions.id))
-                   ) as tasks
- from questions;
-select questions.id, question, answer
-from questions
-join answers ON answers.id_question = questions.id;
-
-select answer from answers
-where answers.id_question = 1;
-
-select question, GROUP_CONCAT(DISTINCT answer ORDER BY answer ASC SEPARATOR ', ') as answers 
-from questions
-join answers ON answers.id_question = questions.id
-group by question;
-
 create table disciplines (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
     name varchar(60) NOT NULL,
@@ -91,17 +40,46 @@ insert into topics (id_discipline, name) values
 (1, 'In meeting'),
 (1, 'In room'),
 (2, 'In street');
-
+select * from topics;
 select topics.id, disciplines.name as 'discipline', topics.name as 'topic'
 from topics
 join disciplines on topics.id_discipline = disciplines.id;
 
-select topics.id, topics.name as 'topic'
-from topics
-join disciplines on topics.id_discipline = disciplines.id
-where disciplines.id = 1
-order by topics.id asc;
+create table questions (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+    question longtext NOT NULL,
+    id_topic INT NOT NULL,
+    FOREIGN KEY (id_topic) REFERENCES topics(id),
+    unique(id)
+);
 
-select disciplines.name as discipline, count(topics.id) as amount_topics from disciplines
-join topics on topics.id_discipline = disciplines.id
-group by disciplines.name;
+insert into questions (id_topic, question) values 
+(1,'How are you?'),
+(3,'Do you speak English?');
+
+select * from questions;
+delete from questions;
+
+create table answers (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY , 
+    id_question INT NOT NULL,
+    answer longtext NOT NULL,
+    isTrue INT NOT NULL,
+    FOREIGN KEY (id_question) REFERENCES questions(id),
+    unique(id)
+);
+
+insert into answers (id_question, answer, isTrue) values
+(1, 'Good', 1),
+(1, 'Bad', 0),
+(1, 'I\'m fine', 0),
+(2, 'Yes, I do', 1),
+(2, 'No, I don\'t', 0);
+truncate answers;
+truncate questions;
+
+select question, disciplines.name 
+from questions
+join disciplines 
+on disciplines.id = (select id_discipline from topics
+			where questions.id_topic = topics.id);

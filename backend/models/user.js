@@ -49,16 +49,20 @@ module.exports.getTasks = () => {
     return new Promise((resolve, reject) => {
         connection.query(`select json_object(
             'id',  questions.id,
+            'topic_id', questions.id_topic,
+            'topic', (select topics.name from topics where topics.id = questions.id_topic),
+            'discipline', (select disciplines.name from  disciplines
+                           where disciplines.id = (select topics.id_discipline from topics
+                           where questions.id_topic = topics.id)),
             'question', question,
             'answers', json_array(
-                               (select GROUP_CONCAT(
-                               "\`", 
-                                          json_object('answer',answer,'isTrue', isTrue), "\`"
+                               (select GROUP_CONCAT('\`', 
+                                          json_object('answer',answer, 'isTrue', isTrue), '\`'
                                        )   
                                 from answers 
                                 where answers.id_question = questions.id))
                              ) as tasks
-           from questions;`, (err, rows, fields) => {
+          from questions;`, (err, rows, fields) => {
             if (err) {
                 return reject(err);
             }
@@ -130,6 +134,22 @@ module.exports.editTopic = function(data, callback) {
 
 module.exports.findByTopic = function(name, callback) {
     connection.query(`SELECT * FROM topics WHERE name = '${name}'`, callback);
+}
+
+module.exports.deleteQuestion = function(idQuestion, callback) {
+    connection.query(`DELETE FROM questions WHERE id = ${idQuestion}`, callback);
+}
+
+module.exports.findByQuestion = function(question, callback) {
+    connection.query(`SELECT * FROM questions WHERE question = '${question}'`, callback);
+}
+
+module.exports.addQuestion = function(data, callback) {
+    connection.query("INSERT INTO questions SET ?", data, callback);
+}
+
+module.exports.addAnswers = function(data, callback) {
+    connection.query("INSERT INTO answers (id_question, answer, isTrue) VALUES ?", [data], callback);
 }
 
 module.exports.sendResponse = function(success, res) {
