@@ -3,7 +3,7 @@
     <mat-card *ngFor="let task of tasks" class="test-wrap">
         <h2 class="question">{{ task.question }}</h2>
         <mat-radio-group *ngIf="task.answers.length > 0" class="answers">
-            <mat-radio-button class="answer" *ngFor="let answer of task.answers" value="{{ answer }}">
+            <mat-radio-button class="answer" *ngFor="let answer of task.answers">
                 {{ answer }}
             </mat-radio-button>
         </mat-radio-group>

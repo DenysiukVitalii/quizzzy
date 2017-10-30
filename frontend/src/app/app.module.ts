@@ -1,16 +1,18 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { MatToolbarModule, MatCardModule, MatListModule, MatRadioModule } from '@angular/material';
+import { SharedModule } from './shared/shared.module';
+// import { MatToolbarModule, MatCardModule, MatListModule, MatRadioModule } from '@angular/material';
+
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { BaseRequestOptions } from '@angular/http';
 
-import { AppComponent }  from './app.component';
-import { routing }        from './app.routing';
+import { AppComponent } from './app.component';
+import { routing } from './app.routing';
 
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
@@ -19,6 +21,7 @@ import { TestComponent, TestService } from './test/index';
 import { LoginComponent } from './login/index';
 import { SignupComponent } from './signup/index';
 import { TeacherComponent } from './teacher/teacher.component';
+import { TeacherPipe } from './_pipes/teacher.pipe';
 
 @NgModule({
   declarations: [
@@ -27,20 +30,23 @@ import { TeacherComponent } from './teacher/teacher.component';
     TestComponent,
     LoginComponent,
     SignupComponent,
-    TeacherComponent
+    TeacherComponent,
+    TeacherPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     routing,
-    MatToolbarModule,
-    MatCardModule,
-    MatListModule,
-    MatRadioModule
+
+    SharedModule,
+    // MatListModule,
+    // MatRadioModule,
+    // MatCardModule,
+    // MatToolbarModule
   ],
   providers: [
-    TestService, 
+    TestService,
     AuthGuard,
     AlertService,
     AuthenticationService,
