@@ -6,6 +6,7 @@ import { SignupComponent } from './signup/index';
 import { TeacherComponent } from './teacher/index';
 import { AuthGuard } from './_guards/index';
 
+
 const appRoutes: Routes = [
     { path: '', component: TestComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },

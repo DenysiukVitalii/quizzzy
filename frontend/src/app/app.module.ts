@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { TeacherModule } from './teacher/teacher.module';
 
 import { SharedModule } from './shared/shared.module';
 import { NoConflictStyleCompatibilityMode } from '@angular/material';
@@ -21,7 +22,6 @@ import { AlertService, AuthenticationService, UserService } from './_services/in
 import { TestComponent, TestService } from './test/index';
 import { LoginComponent } from './login/index';
 import { SignupComponent } from './signup/index';
-import { TeacherComponent } from './teacher/teacher.component';
 import { TeacherPipe } from './_pipes/teacher.pipe';
 
 @NgModule({
@@ -31,8 +31,7 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     TestComponent,
     LoginComponent,
     SignupComponent,
-    TeacherComponent,
-    TeacherPipe
+    TeacherPipe,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +41,8 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     TasksModule,
 
     SharedModule,
-    NoConflictStyleCompatibilityMode
+    NoConflictStyleCompatibilityMode,
+    TeacherModule
   ],
   providers: [
     TestService,
