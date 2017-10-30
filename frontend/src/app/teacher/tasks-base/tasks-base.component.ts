@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-base-tasks',
-  templateUrl: './base-tasks.component.html',
-  styleUrls: ['./base-tasks.component.sass']
+  selector: 'app-tasks-base',
+  templateUrl: './tasks-base.component.html',
+  styleUrls: ['./tasks-base.component.sass']
 })
-export class BaseTasksComponent implements OnInit {
+export class TasksBaseComponent implements OnInit {
 
   navLinks = [
     { path: "task", label: "Завдання"},

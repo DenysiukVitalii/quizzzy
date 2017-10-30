@@ -11,8 +11,6 @@ import { fakeBackendProvider } from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { BaseRequestOptions } from '@angular/http';
 
-import { TasksModule } from './tasks/tasks.module';
-
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
@@ -38,8 +36,7 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     FormsModule,
     HttpModule,
     routing,
-    TasksModule,
-
+    
     SharedModule,
     NoConflictStyleCompatibilityMode,
     TeacherModule
