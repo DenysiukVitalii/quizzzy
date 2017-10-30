@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
                 data => {
                     console.log(data);
                     console.log(this.returnUrl);
-                    if (data.role == "teacher") {
+                    if (data.role === 'teacher') {
                         this.returnUrl = '/teacher';
                         this.router.navigate([this.returnUrl]);
                     } else {
