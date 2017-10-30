@@ -11,7 +11,6 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: SignupComponent },
     { path: 'teacher', component: TeacherComponent },
-
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];
