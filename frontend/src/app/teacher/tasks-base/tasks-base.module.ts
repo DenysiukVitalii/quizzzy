@@ -5,10 +5,10 @@ import { SharedModule } from './../../shared/shared.module';
 import { TasksBaseRoutingModule } from "./tasks-base-routing.module";
 
 import { TasksBaseComponent } from "./tasks-base.component";
-import { TaskComponent } from './task/task.component';
-import { ThemesComponent } from './themes/themes.component';
 
 import { DisciplineModule } from './discipline/discipline.module';
+import { TaskModule } from './task/task.module';
+import { ThemesModule } from './themes/themes.module';
 
 
 @NgModule({
@@ -16,12 +16,12 @@ import { DisciplineModule } from './discipline/discipline.module';
         CommonModule,
         TasksBaseRoutingModule,
         SharedModule,
-        DisciplineModule
+        DisciplineModule,
+        TaskModule,
+        ThemesModule
     ],
     declarations: [
-        TasksBaseComponent,
-        TaskComponent,
-        ThemesComponent,
+        TasksBaseComponent
     ]
 })
 export class TasksBaseModule { }

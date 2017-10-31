@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
+import { TasksService } from './../../../../_services/tasks.service';
+
 @Component({
   selector: 'app-discipline-modal',
   templateUrl: './discipline-modal.component.html',
@@ -8,9 +10,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class DisciplineModalComponent implements OnInit {
 
+  discipline: any = {};
+
   constructor(
     public dialogRef: MatDialogRef<DisciplineModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private tasksService: TasksService
   ) { }
 
   ngOnInit() {
@@ -20,4 +25,14 @@ export class DisciplineModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  createDiscipline() {
+    this.tasksService.create(this.discipline)
+            .subscribe(
+                data => {
+                  console.log(data);
+                },
+                error => {
+                  console.log(error);
+                });
+  }
 }

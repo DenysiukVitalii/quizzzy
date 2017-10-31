@@ -2,37 +2,33 @@
   <div class="button-row">
     <button mat-raised-button color="primary" (click)="openDialog()">Додати дисципліну</button>
   </div>
-  <div class="example-header">
-      <mat-form-field floatPlaceholder="never">
-        <input matInput #filter placeholder="Filter users">
-      </mat-form-field>
-  </div>  
-  <mat-table #table [dataSource]="dataSource" matSort>
+
+  <mat-table #table [dataSource]="dataSource">
       
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
   
       <!-- ID Column -->
-      <ng-container matColumnDef="number">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> № </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.number}} </mat-cell>
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
       </ng-container>
       
       <!-- ID Column -->
-      <ng-container matColumnDef="discipline">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Дисципліна </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.discipline}} </mat-cell>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Дисципліна </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="edit">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
         <mat-cell *matCellDef="let row"> <a mat-raised-button routerLink="." color="primary">Edit</a> </mat-cell>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="delete">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
         <mat-cell *matCellDef="let row"> <a mat-raised-button routerLink="." color="warn">Delete</a> </mat-cell>
       </ng-container>
   
@@ -40,10 +36,38 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
 
-    <mat-paginator #paginator
-                  [length]="exampleDatabase.data.length"
-                  [pageIndex]="0"
-                  [pageSize]="25"
-                  [pageSizeOptions]="[5, 10, 25, 100]">
-    </mat-paginator>
+    
 </div>
+
+<!-- <div class="card">
+    <div class="card-header card-header-icon" data-background-color="purple">
+        <i class="material-icons">assignment</i>
+    </div>
+    <div class="card-content">
+        <h4 class="card-title">DataTables.net</h4>
+        <div class="toolbar">
+                  Here you can write extra buttons/actions for the toolbar              -->
+        <!-- </div>
+        <div class="material-datatables table-responsive">
+            <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                <thead>
+                    <tr>
+                      <th *ngFor="let row of displayedColumns">{{ row }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of disciplines">
+                        <td>{{row.id}}</td>
+                        <td>{{row.name}}</td>
+                        <td class="text-right">
+                            <a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="material-icons">dvr</i></a>
+                            <a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="material-icons">close</i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> --> 
+    <!-- end content-->
+<!-- </div> -->
+<!--  end card  -->

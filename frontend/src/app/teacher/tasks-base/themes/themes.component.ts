@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 
 import {DataSource} from '@angular/cdk/collections';
-import {MatPaginator} from '@angular/material';
+import {MatPaginator, MatDialog} from '@angular/material';
 import {Subject} from 'rxjs/Subject';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
@@ -14,6 +14,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/takeUntil';
 
+import { ThemesModalComponent } from './themes-modal/themes-modal.component';
 
 @Component({
   selector: 'app-themes',
@@ -30,7 +31,7 @@ export class ThemesComponent implements OnInit {
   @ViewChild('filter') filter: ElementRef;
   @ViewChild(MatPaginator) paginator: MatPaginator;  
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
     this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
@@ -44,6 +45,14 @@ export class ThemesComponent implements OnInit {
           this.dataSource.filter = this.filter.nativeElement.value;
         });
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ThemesModalComponent, {
+      height: '350px',
+      width: '400px',
+    });
+  }
+
 }
 
 export interface UserData {

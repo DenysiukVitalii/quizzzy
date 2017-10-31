@@ -113,7 +113,7 @@ app.delete('/deluser/:id', function(req, res, next) {
 });
 
 app.get('/get_tasks', async(req, res) => {
-    let tasks = await admin.getTasks();
+    let tasks = await user.getTasks();
     tasks = tasks.map(el => JSON.parse(el.tasks));
     console.log(tasks);
     tasks = tasks.map(el => {
@@ -130,7 +130,7 @@ app.get('/get_tasks', async(req, res) => {
 });
 
 app.get('/get_disc', async(req, res) => {
-    let discs = await admin.getDisc();
+    let discs = await user.getDisc();
     console.log(discs);
     res.json(discs);
 });
@@ -138,14 +138,14 @@ app.get('/get_disc', async(req, res) => {
 app.post('/create_disc', (req, res) => {
     var data = req.body;
     console.log(data);
-    admin.findByDiscipline(data.name, function(err, rows, fields) {
+    user.findByDiscipline(data.name, function(err, rows, fields) {
         if (rows.length == 1) {
-            admin.sendResponse(false, res);
+            user.sendResponse(false, res);
         } else {
-            admin.addDiscipline(data, function(err, info) {
+            user.addDiscipline(data, function(err, info) {
                 if (err) throw err;
                 console.log(info);
-                admin.sendResponse(true, res);
+                user.sendResponse(true, res);
             });
         };
     });

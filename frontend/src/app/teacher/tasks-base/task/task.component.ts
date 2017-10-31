@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 
 import {DataSource} from '@angular/cdk/collections';
-import {MatPaginator} from '@angular/material';
+import {MatPaginator, MatDialog} from '@angular/material';
 import {Subject} from 'rxjs/Subject';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
@@ -14,6 +14,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/takeUntil';
 
+import { TaskModalComponent } from './task-modal/task-modal.component';
 
 @Component({
   selector: 'app-task',
@@ -29,7 +30,7 @@ export class TaskComponent implements OnInit {
   @ViewChild('filter') filter: ElementRef;
   @ViewChild(MatPaginator) paginator: MatPaginator;  
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
     this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
@@ -42,6 +43,13 @@ export class TaskComponent implements OnInit {
           }
           this.dataSource.filter = this.filter.nativeElement.value;
         });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(TaskModalComponent, {
+      height: '400px',
+      width: '400px',
+    });
   }
 }
 
