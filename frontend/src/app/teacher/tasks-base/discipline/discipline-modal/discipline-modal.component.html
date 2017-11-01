@@ -1,0 +1,32 @@
+<!-- <div class="modal-wrap">
+  <mat-form-field class="modal-form">
+    <input class="modal-input" matInput placeholder="Test name">
+  </mat-form-field>
+  <mat-form-field class="modal-form">
+    <input class="modal-input" matInput placeholder="Theme">
+  </mat-form-field>
+  <mat-form-field class="modal-form">
+    <input class="modal-input" matInput placeholder="Question's count">
+  </mat-form-field>
+  <mat-form-field class="modal-form">
+    <input class="modal-input" matInput placeholder="Time limit">
+  </mat-form-field>
+  <div class="modal-controls">
+    <button mat-raised-button color="accent">Create</button>
+    <button 
+      mat-raised-button
+      color="primary"
+      (click)="onNoClick()">Cancel</button>
+  </div>
+</div>    -->
+
+<h2 mat-dialog-title>Add discipline</h2>
+<mat-dialog-content>
+  <mat-form-field class="modal-form">
+      <input class="modal-input" matInput placeholder="Discipline name" [(ngModel)]="discipline.name">
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" (click)="createDiscipline()">Create</button>    
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
