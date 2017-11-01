@@ -13,8 +13,6 @@ const teacherRoutes: Routes = [
         { path: 'students', component: StudentsBaseComponent },
         { path: 'questions', component: QuestionsBaseComponent },
     ], },
-    // { path: 'students', component: StudentsBaseComponent },
-    // { path: 'questions', component: QuestionsBaseComponent },
 ];
 
 export const routing = RouterModule.forChild(teacherRoutes);
