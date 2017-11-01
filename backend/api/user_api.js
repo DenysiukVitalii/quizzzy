@@ -131,13 +131,11 @@ app.get('/get_tasks', async(req, res) => {
 
 app.get('/get_disc', async(req, res) => {
     let discs = await user.getDisc();
-    console.log(discs);
     res.json(discs);
 });
 
 app.post('/create_disc', (req, res) => {
     var data = req.body;
-    console.log(data);
     user.findByDiscipline(data.name, function(err, rows, fields) {
         if (rows.length == 1) {
             user.sendResponse(false, res);
@@ -153,14 +151,14 @@ app.post('/create_disc', (req, res) => {
 
 app.delete('/delete_disc', (req, res, next) => {
     var data = req.body;
-    console.log(data.id);
-    admin.deleteDiscipline(data.id, function(err, info) {
+    console.log(data);
+    user.deleteDiscipline(data.id, function(err, info) {
         if (err) {
             next(err);
             return res.send({ 'success': 'false' });
         }
         console.log(info);
-        admin.sendResponse(true, res);
+        user.sendResponse(true, res);
     });
 });
 

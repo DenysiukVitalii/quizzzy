@@ -11,7 +11,6 @@ import { DisciplineModalComponent } from './discipline-modal/discipline-modal.co
 import { TasksService } from './../../../_services/tasks.service';
 
 
-
 @NgModule({
     imports: [
         CommonModule,

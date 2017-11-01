@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { TasksService } from './../../../../_services/tasks.service';
 
+
 @Component({
   selector: 'app-discipline-modal',
   templateUrl: './discipline-modal.component.html',
@@ -11,7 +12,7 @@ import { TasksService } from './../../../../_services/tasks.service';
 export class DisciplineModalComponent implements OnInit {
 
   discipline: any = {};
-
+  
   constructor(
     public dialogRef: MatDialogRef<DisciplineModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -26,13 +27,6 @@ export class DisciplineModalComponent implements OnInit {
   }
 
   createDiscipline() {
-    this.tasksService.create(this.discipline)
-            .subscribe(
-                data => {
-                  console.log(data);
-                },
-                error => {
-                  console.log(error);
-                });
+    this.tasksService.create(this.discipline);
   }
 }
