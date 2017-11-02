@@ -12,7 +12,7 @@ import { TasksService } from './../../../../_services/tasks.service';
 export class DisciplineModalComponent implements OnInit {
 
   discipline: any = {};
-  
+
   constructor(
     public dialogRef: MatDialogRef<DisciplineModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -27,6 +27,7 @@ export class DisciplineModalComponent implements OnInit {
   }
 
   createDiscipline() {
-    this.tasksService.create(this.discipline);
+    this.tasksService.create(this.discipline).subscribe();
+    this.discipline.name = '';
   }
 }

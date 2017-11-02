@@ -154,6 +154,7 @@ app.delete('/delete_disc', (req, res, next) => {
     console.log(data);
     user.deleteDiscipline(data.id, function(err, info) {
         if (err) {
+            console.log(err);
             next(err);
             return res.send({ 'success': 'false' });
         }
