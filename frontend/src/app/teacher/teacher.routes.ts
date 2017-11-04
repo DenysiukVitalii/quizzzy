@@ -7,14 +7,6 @@ import { TasksBaseComponent } from "./tasks-base/tasks-base.component";
 
 
 const teacherRoutes: Routes = [
-<<<<<<< HEAD
-    { path: 'teacher', component: TeacherComponent, children: [
-        { path: '', redirectTo: 'tests', pathMatch: 'full' },
-        { path: 'tests', component: TestsBaseComponent },
-        { path: 'students', component: StudentsBaseComponent },
-        { path: 'questions', component: QuestionsBaseComponent },
-    ], },
-=======
     {
         path: 'teacher', component: TeacherComponent,
         children: [
@@ -24,7 +16,6 @@ const teacherRoutes: Routes = [
     },
     { path: 'teacher/students', component: StudentsBaseComponent },
     { path: "teacher/tasks", component: TasksBaseComponent }
->>>>>>> andrew-branch
 ];
 
 export const routing = RouterModule.forChild(teacherRoutes);

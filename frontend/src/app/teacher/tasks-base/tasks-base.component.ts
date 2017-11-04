@@ -11,7 +11,8 @@ export class TasksBaseComponent implements OnInit {
     { path: "task", label: "Завдання"},
     { path: "themes", label: "Теми"},
     { path: "discipline", label: "Дисципліни"}
-  ]
+  ];
+
   constructor() { }
 
   ngOnInit() {

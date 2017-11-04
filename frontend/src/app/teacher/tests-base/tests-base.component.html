@@ -1,11 +1,10 @@
 
 <div class="mat-elevation-z8">
-    <div class="input-wrap-he ader">
-      <mat-form-field floatPlaceholder="never" class="input-wrap">
-        <input matInput #filter placeholder="Filter tests">
-      </mat-form-field>
-    </div>
-  
+  <div class="example-header">
+    <mat-form-field floatPlaceholder="never" class="filter-wrap">
+      <input matInput #filter placeholder="Filter users">
+    </mat-form-field>
+  </div>  
     <mat-table #table [dataSource]="dataSource">
   
       <!--- Note that these columns can be defined in any order.
@@ -45,7 +44,22 @@
         <mat-cell *matCellDef="let row"> {{row.passingCount}} </mat-cell>
       </ng-container>
 
+       <!-- Name Column -->
+       <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+        <mat-cell *matCellDef="let row"> 
+          <a routerLink="." (click)="openDialog()">edit</a>
+          <a routerLink=".">delete</a>
+        </mat-cell>
+      </ng-container>
+
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
+    <mat-paginator #paginator
+      [length]="exampleDatabase.data.length"
+      [pageIndex]="0"
+      [pageSize]="25"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
   </div>

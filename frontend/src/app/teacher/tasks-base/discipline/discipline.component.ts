@@ -43,13 +43,13 @@ export class DisciplineComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log("hello");
+    console.log('hello');
 
     this.dataSource = new MyDataSource(this.dataSubject);
-    
+
   }
- 
-  deleteDiscipline(row: Discip){
+
+  deleteDiscipline(row: Discip) {
     console.log(row);
     this.tasksService.delete(row);
     this.tasksService.getAll().subscribe({
@@ -78,17 +78,16 @@ export class DisciplineComponent implements OnInit {
 }
 
 export class MyDataSource extends DataSource<any[]> {
-  
+
     constructor(private subject: BehaviorSubject<any[]>) {
       super ();
     }
-  
+
     connect (): Observable<any[]> {
       return this.subject.asObservable();
     }
-  
+
     disconnect (  ): void {
-  
+
     }
-  
-  }
+}

@@ -4,7 +4,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Discipline } from './../_models/discipline';
 import { Discip } from './../_models/discip';
 
-import {Observable} from "rxjs/Observable"
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class TasksService {
@@ -13,9 +13,9 @@ export class TasksService {
     options = new RequestOptions({ headers: this.headers });
 
     url = 'http://localhost:8081/';
-    
+
     disciplines = [];
-    
+
     // addDiscipline(discipline) {
     //     this.create(discipline)
     //     .subscribe(
@@ -28,14 +28,14 @@ export class TasksService {
     //         });
     // }
 
-    getDisciplines(){
+    getDisciplines() {
         console.log("qweew");
         this.getAll()
             .subscribe(
                 data => {
                     console.log(data);
                     console.log(this.disciplines);
-                    this.disciplines = data; 
+                    this.disciplines = data;
                     console.log(this.disciplines);
                 },
                 error => {
@@ -45,12 +45,15 @@ export class TasksService {
       }
 
     getAll() {
-        return this.http.get(this.url +'get_disc').map((response: Response) => response.json());
+        return this.http.get(this.url + 'get_disc').map((response: Response) => response.json());
     }
 
 
     create(discipline: Discipline) {
-        return this.http.post(this.url + 'create_disc', JSON.stringify(discipline), this.options).map((response: Response) => response.json()).subscribe();
+        return this.http.post(
+            this.url + 'create_disc',
+            JSON.stringify(discipline),
+            this.options).map((response: Response) => response.json()).subscribe();
     }
 
     // update(user) {

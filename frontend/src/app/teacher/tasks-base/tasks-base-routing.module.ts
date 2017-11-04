@@ -15,7 +15,7 @@ import { ThemesComponent } from './themes/themes.component';
                 children: [
                     { path: "task", component: TaskComponent },
                     { path: "themes", component: ThemesComponent },
-                    { path: "discipline", component: DisciplineComponent },    
+                    { path: "discipline", component: DisciplineComponent },
                     { path: "", redirectTo: "task", pathMatch: "full" }
                 ]
             }
