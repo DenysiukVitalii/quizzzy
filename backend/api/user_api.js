@@ -143,7 +143,7 @@ app.post('/create_disc', (req, res) => {
             user.addDiscipline(data, function(err, info) {
                 if (err) throw err;
                 console.log(info);
-                user.sendResponse(true, res);
+                res.json({id: info.insertId});
             });
         };
     });
@@ -166,14 +166,14 @@ app.delete('/delete_disc', (req, res, next) => {
 app.put('/edit_disc', (req, res) => {
     var data = req.body;
     console.log(data);
-    admin.findByDiscipline(data.name, function(err, rows, fields) {
+    user.findByDiscipline(data.name, function(err, rows, fields) {
         if (rows.length == 1) {
-            admin.sendResponse(false, res);
+            user.sendResponse(false, res);
         } else {
-            admin.editDiscipline(data, function(err, info) {
+            user.editDiscipline(data, function(err, info) {
                 if (err) throw err;
                 console.log(info);
-                admin.sendResponse(true, res);
+                user.sendResponse(true, res);
             });
         };
     });

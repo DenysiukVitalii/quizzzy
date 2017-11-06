@@ -9,6 +9,7 @@ import { DisciplineComponent } from './discipline.component';
 import { DisciplineModalComponent } from './discipline-modal/discipline-modal.component';
 
 import { TasksService } from './../../../_services/tasks.service';
+import { DisciplineEditModalComponent } from './discipline-edit-modal/discipline-edit-modal.component';
 
 
 @NgModule({
@@ -19,10 +20,12 @@ import { TasksService } from './../../../_services/tasks.service';
     ],
     declarations: [
         DisciplineComponent,
-        DisciplineModalComponent
+        DisciplineModalComponent,
+        DisciplineEditModalComponent
     ],
     entryComponents: [
-        DisciplineModalComponent
+        DisciplineModalComponent,
+        DisciplineEditModalComponent
       ],
     providers: [
         TasksService

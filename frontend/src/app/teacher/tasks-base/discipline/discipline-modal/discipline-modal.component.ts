@@ -20,6 +20,7 @@ export class DisciplineModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.discipline.name = "";
   }
 
   onNoClick() {
@@ -27,7 +28,9 @@ export class DisciplineModalComponent implements OnInit {
   }
 
   createDiscipline() {
-    this.tasksService.create(this.discipline).subscribe();
-    this.discipline.name = '';
+    if(this.discipline.name != "") {
+      this.tasksService.create(this.discipline);
+    }
+    this.discipline.name = "";
   }
 }

@@ -16,6 +16,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/takeUntil';
 
 import { DisciplineModalComponent } from './discipline-modal/discipline-modal.component';
+import { DisciplineEditModalComponent } from './discipline-edit-modal/discipline-edit-modal.component';
 
 import { TasksService } from './../../../_services/tasks.service';
 
@@ -30,34 +31,27 @@ import { Discipline } from './../../../_models/discipline';
 export class DisciplineComponent implements OnInit {
 
   displayedColumns = ['id', 'name', 'actions'];
-  // dataSource: MyDataSource | null;
-  // dataSubject = new BehaviorSubject<any[]>([]);
-  disciplines: Discip [];
+  disciplines: Observable<Discip[]>;
 
-  constructor( public dialog: MatDialog, private tasksService: TasksService) {
-    this.disciplines = [];
-   }
+  constructor( public dialog: MatDialog, private tasksService: TasksService) {}
 
   ngOnInit() {
-    // this.dataSource = new MyDataSource(this.dataSubject);
-    this.getDisciplines();
+    this.disciplines = this.tasksService.disciplines;
+    this.tasksService.getAll();
   }
 
-  getDisciplines(){
-    this.tasksService.getAll().subscribe(discipline => this.disciplines = discipline); 
-    
-  }
-  deleteDiscipline(discipline: Discip){
-    this.tasksService.delete(discipline).subscribe(
-      data => {
-        console.log(data);
-        data.success = JSON.parse(data.success);
-        if(data.success) this.disciplines = this.disciplines.filter(disciplines => disciplines !== discipline)
+  editDiscipline(discipline: Discip) {
+    const dialogRefEdit = this.dialog.open(DisciplineEditModalComponent, {
+      height: '350px',
+      width: '400px',
+      data: {
+        discipline: discipline
       }
-    );
-    // this.tasksService.getAll().subscribe({
-    //   next: value => this.dataSubject.next(value)
-    // });
+    })
+  }
+
+  deleteDiscipline(discipline: Discip){
+    this.tasksService.delete(discipline);
   }
 
   openDialog(): void {
@@ -65,31 +59,6 @@ export class DisciplineComponent implements OnInit {
       height: '350px',
       width: '400px',
     });
-
-    dialogRef.afterClosed()
-    .subscribe(selection => {
-      if (selection) {
-        this.getDisciplines();
-      } else {
-        // User clicked 'Cancel' or clicked outside the dialog
-      }
-    });
   }
 
 }
-
-// export class MyDataSource extends DataSource<any[]> {
-  
-//     constructor(private subject: BehaviorSubject<any[]>) {
-//       super ();
-//     }
-  
-//     connect (): Observable<any[]> {
-//       return this.subject.asObservable();
-//     }
-  
-//     disconnect (  ): void {
-  
-//     }
-  
-//   }
