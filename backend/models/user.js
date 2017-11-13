@@ -1,101 +1,31 @@
-var bcrypt = require('bcrypt');
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '1111',
-    database: 'quizzzyDB'
-});
+const request = require('./requests');
+const queries = require('./queries');
+const table = require('./tables');
 
-connection.connect(function() {
-    console.log("Database connected");
-});
-
-module.exports.findAll = function() {
-    return new Promise(function(resolve, c) {
-        connection.query("SELECT * FROM users ORDER BY id DESC", function(err, rows, fields) {
-            if (err) {
-                return resolve(err);
-            }
-            resolve(rows);
-        });
-    })
-}
-
-
-module.exports.addUser = function(data, callback) {
-    connection.query("INSERT INTO users SET ?", data, callback);
-}
-
-module.exports.deleteUser = function(idUser, callback) {
-    connection.query("DELETE FROM users WHERE id = ?", idUser, callback);
-}
-
-module.exports.findByUsername = function(username, callback) {
-    connection.query("SELECT * FROM users WHERE username = '" + username + "'", callback);
-}
-
-module.exports.encrypt = function(data, callback) {
-    bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(data.password, salt, callback);
-    })
-}
-
-module.exports.compare = function(hash, password, callback) {
-    return (bcrypt.compareSync(password, hash)) ? true : false;
-}
-
-module.exports.getTasks = () => {
-    return new Promise((resolve, reject) => {
-        connection.query(`select json_object(
-            'id',  questions.id,
-            'topic_id', questions.id_topic,
-            'topic', (select topics.name from topics where topics.id = questions.id_topic),
-            'discipline', (select disciplines.name from  disciplines
-                           where disciplines.id = (select topics.id_discipline from topics
-                           where questions.id_topic = topics.id)),
-            'question', question,
-            'answers', json_array(
-                               (select GROUP_CONCAT('\`', 
-                                          json_object('answer',answer, 'isTrue', isTrue), '\`'
-                                       )   
-                                from answers 
-                                where answers.id_question = questions.id))
-                             ) as tasks
-          from questions;`, (err, rows, fields) => {
-            if (err) {
-                return reject(err);
-            }
-            resolve(rows);
-        });
-    });
-}
-
-module.exports.getDisc = () => {
-    return new Promise((resolve, reject) => {
-        connection.query(`SELECT * FROM disciplines ORDER BY id ASC`, (err, rows, fields) => {
-            if (err) {
-                return reject(err);
-            }
-            resolve(rows);
-        });
-    });
-}
-
-module.exports.addDiscipline = function(data, callback) {
-    connection.query("INSERT INTO disciplines SET ?", data, callback);
-}
-
-module.exports.deleteDiscipline = function(idDisc, callback) {
-    connection.query(`DELETE FROM disciplines WHERE id = ${idDisc}`, callback);
-}
-
-module.exports.editDiscipline = function(data, callback) {
-    connection.query(`UPDATE disciplines SET name = '${data.name}' WHERE id = ${data.id}`, callback);
-}
-
-module.exports.findByDiscipline = function(name, callback) {
-    connection.query(`SELECT * FROM disciplines WHERE name = '${name}'`, callback);
+module.exports = {
+    getUsers: () => request.getData(queries.getUsers),
+    addUser: (data, callback) => 
+             request.insertData(data, queries.insert(table.users), callback),
+    deleteUser: (idUser, callback) => 
+             request.find(queries.delete(table.users, idUser), callback),
+    findBySpecname: (username, callback) => 
+             request.find(queries.findByUsername(username), callback),
+    encrypt: (data, callback) => {
+        bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(data.password, salt, callback);
+        })
+    },
+    compare: (hash, password, callback) => (bcrypt.compareSync(password, hash)) ? true : false,
+    getTasks: () => request.getData(queries.getTasks),
+    getDisc: () => request.getData(queries.getDisc),
+    addDiscipline: (data, callback) => 
+                   request.insertData(data, queries.insert(table.disciplines), callback),
+    deleteDiscipline: (idDisc, callback) => 
+                      request.find(queries.delete(table.disciplines, idDisc), callback),
+    editDiscipline: (data, callback) => 
+                    request.find(queries.editDiscipline(data), callback),
+    findByDiscipline: (discname, callback) => 
+                      request.find(queries.findByDiscipline(discname), callback),
 }
 
 module.exports.getTopics = (idDisc = '') => {
