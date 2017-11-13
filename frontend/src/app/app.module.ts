@@ -36,7 +36,6 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     FormsModule,
     HttpModule,
     routing,
-    
     SharedModule,
     NoConflictStyleCompatibilityMode,
     TeacherModule
