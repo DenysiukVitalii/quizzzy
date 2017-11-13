@@ -26,66 +26,25 @@ module.exports = {
                     request.find(queries.editDiscipline(data), callback),
     findByDiscipline: (discname, callback) => 
                       request.find(queries.findByDiscipline(discname), callback),
-}
-
-module.exports.getTopics = (idDisc = '') => {
-    let query;
-    query = (idDisc) ?  `select topics.id, topics.name as 'topic'
-                            from topics
-                            join disciplines on topics.id_discipline = disciplines.id
-                            where disciplines.id = ${idDisc}
-                            order by topics.id asc;` :
-                        `select topics.id, topics.name as 'topic', disciplines.name as 'discipline'
-                            from topics
-                            join disciplines on topics.id_discipline = disciplines.id
-                            order by topics.id asc;`;
-    return new Promise((resolve, reject) => {
-        connection.query(query, (err, rows, fields) => {
-            if (err) {
-                return reject(err);
-            }
-            resolve(rows);
-        });
-    });
-}
-
-module.exports.addTopic = function(data, callback) {
-    connection.query("INSERT INTO topics SET ?", data, callback);
-}
-
-module.exports.deleteTopic = function(idTopic, callback) {
-    connection.query(`DELETE FROM topics WHERE id = ${idTopic}`, callback);
-}
-
-module.exports.editTopic = function(data, callback) {
-    connection.query(`UPDATE topics SET name = '${data.name}', id_discipline = '${data.id_discipline}'
-                      WHERE id = ${data.id}`, callback);
-}
-
-module.exports.findByTopic = function(name, callback) {
-    connection.query(`SELECT * FROM topics WHERE name = '${name}'`, callback);
-}
-
-module.exports.deleteQuestion = function(idQuestion, callback) {
-    connection.query(`DELETE FROM questions WHERE id = ${idQuestion}`, callback);
-}
-
-module.exports.findByQuestion = function(question, callback) {
-    connection.query(`SELECT * FROM questions WHERE question = '${question}'`, callback);
-}
-
-module.exports.addQuestion = function(data, callback) {
-    connection.query("INSERT INTO questions SET ?", data, callback);
-}
-
-module.exports.addAnswers = function(data, callback) {
-    connection.query("INSERT INTO answers (id_question, answer, isTrue) VALUES ?", [data], callback);
-}
-
-module.exports.sendResponse = function(success, res) {
-    if (success) {
-        res.send({ 'success': 'true' });
-    } else {
-        res.send({ 'success': 'false' });
-    }
+    addTopic: (data, callback) => 
+              request.insertData(data, queries.insert(table.topisc), callback),
+    deleteTopic: (idTopic, callback) => 
+                 request.find(queries.delete(table.topics, idTopic), callback),
+    editTopic: (data, callback) => 
+                request.find(queries.editTopic(data), callback),
+    findByTopic: (topicname, callback) => 
+                request.find(queries.findByTopic(topicname), callback),
+    addQuestion: (data, callback) => 
+                request.insertData(data, queries.insert(table.questions), callback),
+    findByQuestion: (question, callback) => 
+                request.find(queries.findByQuestion(question), callback),
+    deleteQuestion: (idQuestion, callback) => 
+                    request.find(queries.delete(table.questions, idQuestion), callback),
+    addAnswers: (data, callback) => 
+                request.insertDataArray(data, queries.insertAnswers, callback),
+    getTopics: (idDisc = '') => {
+                    let query = (idDisc) ?  queries.getTopicsByDisc : queries.getTopics;
+                    return request.getData(query);
+               },
+    sendResponse: (success, res) => (success) ? res.json({ success: true }) : res.json({ success: false })
 }

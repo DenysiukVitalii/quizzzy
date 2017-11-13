@@ -1,4 +1,6 @@
 module.exports = {
     users: "users",
-    disciplines: "disciplines"
+    disciplines: "disciplines",
+    topics: "topics",
+    questions: "questions"
 }

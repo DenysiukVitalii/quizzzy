@@ -24,6 +24,9 @@ module.exports = {
     insertData: (data, query, callback) => {
         connection.query(query, data, callback);
     },
+    insertDataArray: (data, query, callback) => {
+        connection.query(query, [data], callback);
+    },
     find: (query, callback) => {
         connection.query(query, callback);
     }

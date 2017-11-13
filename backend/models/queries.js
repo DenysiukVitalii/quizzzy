@@ -21,5 +21,19 @@ module.exports = {
                     from questions;`,
     getDisc: `SELECT * FROM disciplines ORDER BY id ASC`,
     editDiscipline: (data) => `UPDATE disciplines SET name = '${data.name}' WHERE id = ${data.id}`,
-    findByDiscipline: (discname) => `SELECT * FROM disciplines WHERE name = '${discname}'`
+    findByDiscipline: (discname) => `SELECT * FROM disciplines WHERE name = '${discname}'`,
+    editTopic: `UPDATE topics SET name = '${data.name}', id_discipline = '${data.id_discipline}'
+                WHERE id = ${data.id}`,
+    findByTopic: (topicname) => `SELECT * FROM topics WHERE name = '${topicname}'`,
+    findByQuestion: (question) => `SELECT * FROM questions WHERE question = '${question}'`,
+    insertAnswers: "INSERT INTO answers (id_question, answer, isTrue) VALUES ?",
+    getTopicsByDisc: (idDisc) => `select topics.id, topics.name as 'topic'
+                                    from topics
+                                    join disciplines on topics.id_discipline = disciplines.id
+                                    where disciplines.id = ${idDisc}
+                                    order by topics.id asc;`,
+    getTopics: `select topics.id, topics.name as 'topic', disciplines.name as 'discipline'
+                    from topics
+                    join disciplines on topics.id_discipline = disciplines.id
+                    order by topics.id asc;`
 }
