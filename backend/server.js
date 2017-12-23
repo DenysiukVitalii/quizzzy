@@ -1,7 +1,5 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var bcrypt = require('bcrypt');
-var mysql = require('mysql');
 
 // Initialize Express App
 var app = express();
@@ -15,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', express.static(__dirname));
 
 // Import API Routes
-app.use(require('./api/user_api'));
+app.use(require('./api'));
 
 port = process.env.PORT || 8081;
 
