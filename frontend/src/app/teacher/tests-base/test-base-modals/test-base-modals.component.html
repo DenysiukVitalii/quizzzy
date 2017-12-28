@@ -1,0 +1,26 @@
+<div class="modal-wrap">
+    <mat-form-field class="modal-form">
+      <input class="modal-input" matInput placeholder="Name" [(ngModel)]="tmpData">
+    </mat-form-field>
+    <mat-form-field class="modal-form">
+      <input class="modal-input" matInput placeholder="Subject">
+    </mat-form-field>
+    <mat-form-field class="modal-form">
+      <input class="modal-input" matInput placeholder="Theme">
+    </mat-form-field>
+    <mat-form-field class="modal-form">
+        <input matInput [matDatepicker]="picker" placeholder="Created Date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="modal-form">
+        <input class="modal-input" matInput placeholder="Passing Count">
+      </mat-form-field>
+    <div class="modal-controls">
+      <button mat-raised-button color="accent" (click)="onSave()">Save</button>
+      <button 
+        mat-raised-button
+        color="primary"
+        (click)="onNoClick()">Cancel</button>
+    </div>
+</div>   

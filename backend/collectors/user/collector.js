@@ -1,6 +1,7 @@
 const request = require('../requests');
 const c_queries = require('../common_queries');
 const queries = require('./queries');
+const bcrypt = require('bcrypt');
 
 const TABLE = 'users';
 let collector = {};

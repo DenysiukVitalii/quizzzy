@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Add discipline</h2>
+<mat-dialog-content>
+  <mat-form-field class="modal-form">
+      <input class="modal-input" matInput placeholder="Discipline name" [(ngModel)]="discipline.name">
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="createDiscipline()">Create</button>    
+  <button mat-button [mat-dialog-close]="true">Close</button>
+</mat-dialog-actions>
