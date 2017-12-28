@@ -1,4 +1,5 @@
 const app = require('express')();
+const bcrypt = require('bcrypt');
 
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');

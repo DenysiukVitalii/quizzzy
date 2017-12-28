@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 
 // Initialize Express App
 var app = express();
