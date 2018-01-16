@@ -5,6 +5,7 @@ import { SharedModule } from './../../../shared/shared.module';
 
 import { ThemesComponent } from './themes.component';
 import { ThemesModalComponent } from './themes-modal/themes-modal.component';
+import { ThemesEditModalComponent } from './themes-edit-modal/themes-edit-modal.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ThemesModalComponent } from './themes-modal/themes-modal.component';
     declarations: [
         ThemesComponent,
         ThemesModalComponent,
+        ThemesEditModalComponent,
     ],
     entryComponents: [
         ThemesModalComponent

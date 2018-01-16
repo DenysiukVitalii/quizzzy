@@ -45,10 +45,12 @@ export class TasksService {
         .subscribe(data => {
             // this.dataStore.disciplines.push(data);
             console.log(data);
-            console.log(discipline.name);
-            this.dataStore.disciplines.push({id: data.id, name: name});
-            console.log(this.dataStore.disciplines);
-            this._disciplines.next(Object.assign({}, this.dataStore).disciplines);
+            data.success = JSON.parse(data.success);
+            if(data.success) { 
+                this.dataStore.disciplines.push({id: data.id, name: name});
+                console.log(this.dataStore.disciplines);
+                this._disciplines.next(Object.assign({}, this.dataStore).disciplines);
+            }
           });
     }
 
@@ -79,13 +81,15 @@ export class TasksService {
             data => {
                 console.log(data);
                 data.success = JSON.parse(data.success);
-                if(data.success) this.dataStore.disciplines = this.dataStore.disciplines.filter(disciplines => disciplines !== discipline);
-
-                // this.dataStore.disciplines.forEach((t, i) => {
-                // if (t.id === discipline.id) { this.dataStore.disciplines.splice(i, 1); }
-                // });
-      
-                this._disciplines.next(Object.assign({}, this.dataStore).disciplines);
+                if(data.success) { 
+                    this.dataStore.disciplines = this.dataStore.disciplines.filter(disciplines => disciplines !== discipline);
+                    
+                    // this.dataStore.disciplines.forEach((t, i) => {
+                    // if (t.id === discipline.id) { this.dataStore.disciplines.splice(i, 1); }
+                    // });
+            
+                    this._disciplines.next(Object.assign({}, this.dataStore).disciplines);
+                } 
             });
     }
 
