@@ -46,22 +46,4 @@ collector.getTasksByTestId = (id) => {
     return data;
 }
 
-
-/*
-
-
-
-
-collector.deleteDiscipline = (id, callback) => {
-    const query = c_queries.delete(TABLE, id);
-    const res = request.find(query, callback);
-    return res;
-}
-
-collector.editDiscipline = (data, callback) => {
-    const query = queries.editDiscipline(data);
-    const res = request.find(query, callback);
-    return res;
-}*/
-
 module.exports = collector;
