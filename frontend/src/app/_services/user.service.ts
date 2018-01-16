@@ -6,7 +6,7 @@ import { User } from '../_models/index';
 @Injectable()
 export class UserService {
     constructor(private http: Http) { }
-    headers = new Headers({"Content-Type": "application/json"});
+    headers = new Headers({'Content-Type': 'application/json'});
     options = new RequestOptions({ headers: this.headers });
 
     getAll() {
@@ -18,7 +18,8 @@ export class UserService {
     }
 
     create(user: User) {
-        return this.http.post('http://localhost:8081/signup', JSON.stringify(user), this.options).map((response: Response) => response.json());
+        return this.http.post('http://localhost:8081/signup', JSON.stringify(user), this.options)
+                        .map((response: Response) => response.json());
     }
 
     update(user: User) {
@@ -33,9 +34,9 @@ export class UserService {
 
     private jwt() {
         // create authorization header with jwt token
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {
-            let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
+            const headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
             return new RequestOptions({ headers: headers });
         }
     }
