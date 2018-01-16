@@ -83,3 +83,45 @@ from questions
 join disciplines 
 on disciplines.id = (select id_discipline from topics
 			where questions.id_topic = topics.id);
+
+create table tests (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+    name varchar(60) NOT NULL UNIQUE,
+    id_discipline INT NOT NULL,
+    id_topic INT NOT NULL,
+    amount_tasks INT NOT NULL,
+    timer INT NOT NULL,
+    FOREIGN KEY (id_discipline) REFERENCES disciplines(id),
+    FOREIGN KEY (id_topic) REFERENCES topics(id)
+);
+
+select disciplines.name as 'discipline', 
+	   topics.name as 'topic', 
+       disciplines.id as 'id_discipline', 
+       topics.id as 'id_topic',
+	   tests.name as 'test_name', 
+       tests.amount_tasks, 
+       tests.timer from tests
+join disciplines on tests.id_discipline = disciplines.id
+join topics on tests.id_topic = topics.id;
+
+insert into tests (name, id_discipline, id_topic, amount_tasks, timer) values
+('Test1', 1, 1, 1, 10);
+
+select * from tests;
+delete from tests;
+create table test_tasks (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+    id_test INT NOT NULL,
+    id_question INT NOT NULL,
+    FOREIGN KEY (id_test) REFERENCES tests(id),
+    FOREIGN KEY (id_question) REFERENCES questions(id)
+);
+
+insert into test_tasks (id_test, id_question) values
+(1, 5),
+(1, 6);
+
+delete  from test_tasks;
+select * from test_tasks
+where id_test = 1;
