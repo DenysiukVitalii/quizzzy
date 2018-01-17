@@ -38,11 +38,11 @@ export class TasksService {
           });
     }
 
-    create(id_topic, question, answers) {
+    create(theme, question, answers) {
         this.success = undefined;
         // let name = task.name;
         let task = {
-            id_topic: id_topic,
+            id_topic: theme.id,
             question: question,
             answers: answers
         };
@@ -55,7 +55,7 @@ export class TasksService {
             data.success = JSON.parse(data.success);
             this.success = data.success;
             if(data.success) { 
-                this.dataStore.tasks.push({id: data.id, question: question});
+                this.dataStore.tasks.push({id: data.id, question: question, topic: theme.topic, discipline: theme.discipline});
                 console.log(this.dataStore.tasks);
                 this._tasks.next(Object.assign({}, this.dataStore).tasks);
             }
