@@ -1,28 +1,52 @@
-<h2 mat-dialog-title>Add task</h2>
-<mat-dialog-content>
-  <mat-form-field>
-    <mat-select placeholder="Discipline">
-      <mat-option *ngFor="let discipline of disciplines" [value]="discipline.value">
-        {{ discipline.viewValue }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-select placeholder="Theme">
-      <mat-option *ngFor="let theme of themes" [value]="theme.value">
-        {{ theme.viewValue }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-      <textarea matInput placeholder="Question"></textarea>
-  </mat-form-field>
-  <br>
-  <button mat-mini-fab color="primary">
-    <mat-icon>add</mat-icon>
-  </button>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="true">Create</button>    
-  <button mat-button mat-dialog-close>Cancel</button>
-</mat-dialog-actions>
+<div class="container">
+
+    <!-- <h2 mat-dialog-title>Add task</h2> -->
+    <!-- <mat-dialog-content> -->
+
+      <mat-form-field>
+        <mat-select placeholder="Discipline" [(ngModel)]="selectedDiscipline" (change)="onSelect($event.value)">
+          <mat-option *ngFor="let discipline of disciplines | async" [value]="discipline">
+            {{ discipline.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Theme" [(ngModel)]="selectedTheme">
+          <mat-option *ngFor="let theme of themes | async" [value]="theme">
+            {{ theme.topic }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea matInput placeholder="Question" [(ngModel)]="question"></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput #input type="text" placeholder="Answer" [(ngModel)]="newAnswer" >
+      </mat-form-field>
+
+      <button mat-mini-fab color="primary" (click)="addAnswer()" [disabled]="input.value===''">
+        <mat-icon>add</mat-icon>
+      </button>
+
+      <ul *ngIf="answers">
+        <li *ngFor="let answer of answers; let i=index">
+          <!-- <input type="checkbox"   /> -->
+          <mat-checkbox class="checkbox" color="primary" [(ngModel)]="answer.isTrue"> 
+            <span [ngClass]="{'checked': answer.isTrue}">{{ answer.answer }}</span>
+            <span (click)="deleteAnswer(i)" class="delete-icon">[X]</span>
+          </mat-checkbox>
+        </li>
+      </ul>
+
+    <!-- </mat-dialog-content>
+    <mat-dialog-actions> -->
+      <!-- <button mat-raised-button color="primary" type="submit" [disabled]="!addTaskForm.valid">
+        Create</button> -->
+        <button mat-raised-button color="primary" (click)="createSickLeave()" >
+          Create</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="true">Close</button>
+    <!-- </mat-dialog-actions> -->
+</div>

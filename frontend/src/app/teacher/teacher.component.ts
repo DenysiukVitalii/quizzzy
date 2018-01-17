@@ -1,5 +1,4 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { CreateTestModalComponent } from './create-test-modal/create-test-modal.component';
 
@@ -10,18 +9,20 @@ import { CreateTestModalComponent } from './create-test-modal/create-test-modal.
   styleUrls: ['./teacher.component.sass']
 })
 export class TeacherComponent implements OnInit {
+  teacher;
 
   constructor(
     public dialog: MatDialog
   ) { }
 
   ngOnInit() {
-
+    let сurrentUser = JSON.parse(localStorage.getItem("currentUser"));   
+    this.teacher = сurrentUser.username;
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CreateTestModalComponent, {
-      height: '350px',
+      height: '400px',
       width: '400px',
     });
   }

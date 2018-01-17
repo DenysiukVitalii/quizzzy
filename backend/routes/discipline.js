@@ -17,7 +17,7 @@ app.post('/create_disc', (req, res) => {
             collector.addDiscipline(data, function(err, info) {
                 if (err) throw err;
                 console.log(info);
-                res.json({ success: true });
+                res.json({ id: info.insertId, success: true });
             });
         };
     });

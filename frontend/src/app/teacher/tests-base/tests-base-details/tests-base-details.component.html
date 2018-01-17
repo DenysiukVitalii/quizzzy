@@ -1,0 +1,12 @@
+<p><a [routerLink]="['/teacher/tests']">Go back</a></p>
+<div *ngIf="test?.length > 0" >
+    <mat-card *ngFor="let task of test" >
+        <h2 class="question">{{ task.question }}</h2>
+        <ul *ngIf="task.answers?.length > 0">
+          <li 
+          *ngFor="let answer of task.answers"
+          [style.font-weight]="answer.isTrue ? 'bold' : 'normal'"
+          >{{answer.answer}}</li>
+        </ul>
+    </mat-card>
+</div>

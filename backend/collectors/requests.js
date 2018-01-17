@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '1111',
+    password: '12345',
     database: 'quizzzyDB',
     timezone: 'utc'  
 });

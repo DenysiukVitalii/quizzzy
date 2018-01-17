@@ -1,3 +1,4 @@
+<p><a [routerLink]="['/teacher/tests']">Go back</a></p>
 <nav mat-tab-nav-bar>
   <a mat-tab-link
       *ngFor="let link of navLinks"
@@ -7,5 +8,4 @@
       {{link.label}}
   </a>
 </nav>
-    
 <router-outlet></router-outlet>

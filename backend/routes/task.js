@@ -43,7 +43,7 @@ app.post('/create_question', (req, res) => {
                     if (err) throw err;
                     console.log(info);
                 });
-                res.json({ success: true });
+                res.json({ id: info.insertId, success: true });
             });
         };
     });

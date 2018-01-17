@@ -1,14 +1,14 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { SharedModule } from './../../../shared/shared.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { DisciplineComponent } from './discipline.component';
 
 import { DisciplineModalComponent } from './discipline-modal/discipline-modal.component';
 
-import { TasksService } from './../../../_services/tasks.service';
 import { DisciplineEditModalComponent } from './discipline-edit-modal/discipline-edit-modal.component';
 
 
@@ -16,7 +16,9 @@ import { DisciplineEditModalComponent } from './discipline-edit-modal/discipline
     imports: [
         CommonModule,
         SharedModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule,
+        NgxPaginationModule
     ],
     declarations: [
         DisciplineComponent,
@@ -26,9 +28,6 @@ import { DisciplineEditModalComponent } from './discipline-edit-modal/discipline
     entryComponents: [
         DisciplineModalComponent,
         DisciplineEditModalComponent
-      ],
-    providers: [
-        TasksService
     ]
 })
 export class DisciplineModule { }

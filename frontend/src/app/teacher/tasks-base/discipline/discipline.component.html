@@ -1,59 +1,29 @@
-<br>
-<div class="button-row">
-        <button mat-raised-button color="primary" (click)="openDialog()" >Додати дисципліну</button>
+<div class="container">
+    <div class="top">
+        <!-- <button mat-raised-button color="primary" (click)="openDialog()">Додати дисципліну</button> -->
+        <button mat-raised-button color="primary" class="button-add" (click)="createDiscipline()">Add discipline</button>
+
+        <mat-form-field class="search">
+            <input matInput placeholder="Search" [(ngModel)]="searchString">
+        </mat-form-field>
+    </div>
+    <table id="datatables" class="table">
+        <thead>
+            <tr>
+                <th *ngFor="let row of displayedColumns">{{ row }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let discipline of disciplines| async | filter : searchString | paginate: { itemsPerPage: countItems, currentPage: page }; let i = index">
+                <td>{{i+1+page*countItems-countItems}}</td>
+                <td>{{discipline.name}}</td>
+                <td class="">
+                    <button mat-raised-button color="primary" (click)="editDiscipline(discipline)" class="action"><mat-icon>edit</mat-icon></button>
+                    <button mat-raised-button color="warn" (click)="deleteDiscipline(discipline)" class="action"><mat-icon>clear</mat-icon></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <pagination-controls class="my-pagination" (click)="resize()" (pageChange)="page = $event"></pagination-controls>
+
 </div>
-<br>
-<div class="example-container mat-elevation-z8">
-    <div class="card">
-        <div class="card-content">
-            <div class="toolbar">
-                    
-            </div>
-        <div class="material-datatables table-responsive">
-            <table id="datatables" class="table table-hover" cellspacing="0" width="100%" style="width:100%; background-color: #fff">
-                <thead>
-                    <tr>
-                        <th *ngFor="let row of displayedColumns">{{ row }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let discipline of disciplines| async; let i = index">
-                        <td>{{i+1}}</td>
-                        <td>{{discipline.name}}</td>
-                        <td class="">
-                            <button mat-raised-button color="primary" (click)="editDiscipline(discipline)">Edit</button>
-                            <button mat-raised-button color="warn" (click)="deleteDiscipline(discipline)">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div> 
-    
-</div>
-
-<!-- <mat-table #table [dataSource]="dataSource">
-  
-      <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> № </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
-      </ng-container>
-      
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Дисципліна </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="edit">
-        <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
-        <mat-cell *matCellDef="let row"> <button mat-raised-button color="primary" (click)="editDiscipline(row)">Edit</button> </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="delete">
-        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-        <mat-cell *matCellDef="let row"> <button mat-raised-button color="warn" (click)="deleteDiscipline(row)">Delete</button> </mat-cell>
-      </ng-container>
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table> -->
