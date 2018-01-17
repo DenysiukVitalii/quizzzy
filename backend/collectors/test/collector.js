@@ -41,6 +41,12 @@ collector.deleteTest = (id, callback) => {
     return res;
 }
 
+collector.deleteTestTasks = (id, callback) => {
+    const query = queries.deleteTestTasks(id);
+    const res = request.find(query, callback);
+    return res;
+}
+
 collector.getTasksByTestId = (id) => {
     const data = request.getData(queries.getTasksByTestId(id));
     return data;
