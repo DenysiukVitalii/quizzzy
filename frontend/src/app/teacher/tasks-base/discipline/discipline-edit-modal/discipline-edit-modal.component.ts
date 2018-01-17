@@ -1,7 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
-import { TasksService } from './../../../../_services/tasks.service';
+import { CheckErrorValidators } from './../../../../shared/check-error-validators';
+import { success, error } from './../../../../shared/alert';
+
+import { DisciplineService } from './../../../../_services/index';
 
 @Component({
   selector: 'app-discipline-edit-modal',
@@ -11,27 +15,62 @@ import { TasksService } from './../../../../_services/tasks.service';
 export class DisciplineEditModalComponent implements OnInit {
 
   discipline: any = {};
-  
+  editDisciplineForm: FormGroup;
+  checkErrors: CheckErrorValidators = new CheckErrorValidators();
+
+  formErrors = {
+    "name": "",
+  };
+
   constructor(
     public dialogRef: MatDialogRef<DisciplineEditModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private tasksService: TasksService
+    private disciplineService: DisciplineService,
+    private fb: FormBuilder
   ) { }
   
   ngOnInit() {
     console.log(this.data);
     this.discipline.id = this.data.discipline.id;
     this.discipline.name = this.data.discipline.name;
-    console.log(this.discipline.name);
+    this.buildForm();    
+  }
+
+  buildForm() {
+    this.editDisciplineForm = this.fb.group({
+      "name": [this.discipline.name, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(20),
+        Validators.pattern("[A-ZЄ-ЯҐ]{1}[A-Za-zЄ-ЯҐа-їґ\s]+$")
+      ]]
+    });
+
+    this.editDisciplineForm.valueChanges
+      .subscribe(data => this.checkErrors.onValueChange(this.editDisciplineForm, this.formErrors, data));
+
+    this.checkErrors.onValueChange(this.editDisciplineForm, this.formErrors);
   }
 
   editDiscipline() {
     console.log(this.discipline);
-    console.log("asdddddd");
-    if(this.discipline.name != "") {
-      this.tasksService.update(this.discipline);
-      this.dialogRef.close();
-    }
+    this.discipline.name = this.editDisciplineForm.get('name').value;
+    this.disciplineService.update(this.discipline);
+    this.alert();
+  }
+
+  alert() {
+    let s = setInterval(() => {
+      if(this.disciplineService.success !== undefined){
+        clearInterval(s);
+        if(this.disciplineService.success){
+          success();
+          setTimeout(() => this.dialogRef.close(), 1600);
+          } else {
+            error();
+          }
+      }
+    }, 50);
   }
 
 }

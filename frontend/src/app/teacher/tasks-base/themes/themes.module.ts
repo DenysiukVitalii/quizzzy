@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { SharedModule } from './../../../shared/shared.module';
 
@@ -11,7 +12,9 @@ import { ThemesEditModalComponent } from './themes-edit-modal/themes-edit-modal.
 @NgModule({
     imports: [
         CommonModule,
-        SharedModule
+        SharedModule,
+        FormsModule, 
+        ReactiveFormsModule
     ],
     declarations: [
         ThemesComponent,
@@ -19,7 +22,8 @@ import { ThemesEditModalComponent } from './themes-edit-modal/themes-edit-modal.
         ThemesEditModalComponent,
     ],
     entryComponents: [
-        ThemesModalComponent
+        ThemesModalComponent,
+        ThemesEditModalComponent
     ],
 })
 export class ThemesModule { }

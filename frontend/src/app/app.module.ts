@@ -7,7 +7,7 @@ import { TeacherModule } from './teacher/teacher.module';
 import { SharedModule } from './shared/shared.module';
 import { NoConflictStyleCompatibilityMode } from '@angular/material';
 // used to create fake backend
-import { fakeBackendProvider } from './_helpers/index';
+// import { fakeBackendProvider } from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { BaseRequestOptions } from '@angular/http';
 
@@ -16,7 +16,7 @@ import { routing } from './app.routing';
 
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService, UserService } from './_services/index';
+import { AlertService, AuthenticationService, UserService, DisciplineService, ThemeService, TasksService } from './_services/index';
 import { TestComponent, TestService } from './test/index';
 import { LoginComponent } from './login/index';
 import { SignupComponent } from './signup/index';
@@ -47,9 +47,11 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     AlertService,
     AuthenticationService,
     UserService,
-
+    DisciplineService,
+    ThemeService,
+    TasksService,
     // providers used to create fake backend
-    fakeBackendProvider,
+    // fakeBackendProvider,
     MockBackend,
     BaseRequestOptions],
   bootstrap: [AppComponent]

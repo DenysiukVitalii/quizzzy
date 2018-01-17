@@ -9,6 +9,7 @@ module.exports = {
                 join disciplines on topics.id_discipline = disciplines.id
                 order by topics.id asc;`,
     findByTopic: (topicname) => `SELECT * FROM topics WHERE name = '${topicname}'`,
-    editTopic: (data) => `UPDATE topics SET name = '${data.name}', id_discipline = '${data.id_discipline}'
+    editTopic: (data) => `UPDATE topics SET name = '${data.name}' 
                                             WHERE id = ${data.id}`
 }
+// , id_discipline = '${data.id_discipline}'
