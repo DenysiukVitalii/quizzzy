@@ -1,4 +1,15 @@
-<mat-toolbar color="primary">Quizzy</mat-toolbar>
+<mat-toolbar color="primary">
+    <div class="toolbar">
+        <span>{{ title }}</span>
+        <a *ngIf="!(this.router.url.includes('/login') || this.router.url.includes('/register'))"
+           routerLink="/"
+           (click)="onLogout()"
+           class="mat-icon"
+        >
+            logout
+        </a>
+    </div>
+</mat-toolbar>
 <div class="jumbotron">
     <div class="container">
         <div class="col-sm-8 col-sm-offset-2">

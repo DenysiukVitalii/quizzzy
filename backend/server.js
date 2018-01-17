@@ -16,7 +16,7 @@ app.use('/', express.static(__dirname));
 // Import API Routes
 app.use(require('./api'));
 
-port = process.env.PORT || 8083;
+port = process.env.PORT || 8081;
 
 app.listen(port, function() {
     console.log("listening to port " + port);
