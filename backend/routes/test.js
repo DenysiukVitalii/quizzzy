@@ -48,14 +48,22 @@ function fillTest(id_test, tasks) {
 app.delete('/delete_test', (req, res, next) => {
     var data = req.body;
     console.log(data.id);
-    collector.deleteTest(data.id, function(err, info) {
+    collector.deleteTestTasks(data.id, function(err, info) {
         if (err) {
             next(err);
             return res.json({ success: false });
         }
+        collector.deleteTest(data.id, function(err, info) {
+            if (err) {
+                next(err);
+                return res.json({ success: false });
+            }
+            console.log(info);
+        });
         console.log(info);
         res.json({ success: true });
     });
+    
 });
 
 app.get('/tests/:_id', async(req, res) => {

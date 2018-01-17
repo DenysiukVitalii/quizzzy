@@ -6,6 +6,8 @@ module.exports = {
                     'discipline', (select disciplines.name from  disciplines
                                 where disciplines.id = (select topics.id_discipline from topics
                                 where questions.id_topic = topics.id)),
+                    'date', questions.date, 
+                    'creator', questions.creator,
                     'question', question,
                     'answers', json_array(
                                     (select GROUP_CONCAT('\`', 
@@ -17,4 +19,5 @@ module.exports = {
                 from questions;`,
     findByQuestion: (question) => `SELECT * FROM questions WHERE question = '${question}'`,
     insertAnswers: "INSERT INTO answers (id_question, answer, isTrue) VALUES ?",
+    deleteAnswers: (id) => `delete from answers where id_question = '${id}'`
 }
