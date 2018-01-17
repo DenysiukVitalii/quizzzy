@@ -84,6 +84,24 @@ app.get('/tests/:_id', async(req, res) => {
     res.json(test_tasks);
 });
 
+app.post('/get_test', async(req, res) => {
+    let data = req.body;
+    let test_tasks = await collector.getTasksByTestId(data.id);
+    console.log(test_tasks);
+    test_tasks = test_tasks.map(el => JSON.parse(el.task));
+    console.log(test_tasks);
+    test_tasks = test_tasks.map(el => {
+        let answers = el.answers;
+        answers = answers[0];
+        answers = answers.slice(1,-1);
+        answers = answers.split('`,`');
+        answers = '{"answers":['.concat(answers, "]}");
+        el.answers = JSON.parse(answers).answers;
+        return el;
+    });
+    console.log(test_tasks);
+    res.json(test_tasks);
+});
 
 
 module.exports = app;
