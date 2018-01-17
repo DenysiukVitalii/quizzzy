@@ -84,6 +84,10 @@ export class TaskModalComponent implements OnInit {
     console.log(this.question);
     console.log(this.answers);
     this.tasksService.create(this.selectedTheme, this.question, this.answers);
+    this.selectedDiscipline = undefined;
+    this.selectedTheme = undefined;
+    this.question = '';
+    this.answers = [];
     this.alert();
   }
 

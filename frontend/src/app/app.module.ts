@@ -16,7 +16,7 @@ import { routing } from './app.routing';
 
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService, UserService, DisciplineService, ThemeService, TasksService } from './_services/index';
+import { AlertService, AuthenticationService, UserService, DisciplineService, ThemeService, TasksService, TestsService } from './_services/index';
 import { TestComponent, TestService } from './test/index';
 import { LoginComponent } from './login/index';
 import { SignupComponent } from './signup/index';
@@ -36,7 +36,6 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     FormsModule,
     HttpModule,
     routing,
-    
     SharedModule,
     NoConflictStyleCompatibilityMode,
     TeacherModule
@@ -50,6 +49,7 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     DisciplineService,
     ThemeService,
     TasksService,
+    TestsService,
     // providers used to create fake backend
     // fakeBackendProvider,
     MockBackend,

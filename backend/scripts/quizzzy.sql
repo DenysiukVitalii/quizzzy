@@ -125,3 +125,31 @@ insert into test_tasks (id_test, id_question) values
 delete  from test_tasks;
 select * from test_tasks
 where id_test = 1;
+
+
+create table statistic (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+    username VARCHAR(20) NOT NULL,
+    id_test INT NOT NULL,
+    result INT NOT NULL,
+    date date NOT NULL,
+    FOREIGN KEY (id_test) REFERENCES tests(id)
+);
+
+
+select statistic.id_test, 
+       statistic.result,
+       statistic.date,
+       tests.name,
+       tests.id_discipline,
+       tests.id_topic,
+       disciplines.name as 'discipline',
+       topics.name as 'topic'
+       from statistic
+join tests on statistic.id_test = tests.id
+join disciplines on tests.id_discipline = disciplines.id
+join topics on tests.id_topic = topics.id
+where statistic.username = 'student';
+
+insert into statistic (username, id_test, result, date) values
+('student', 16, 76, '2017-01-15');

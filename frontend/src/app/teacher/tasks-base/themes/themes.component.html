@@ -18,8 +18,8 @@
               <td>{{theme.discipline}}</td>
               <td>{{theme.topic}}</td>
               <td class="">
-                  <button mat-raised-button color="primary" (click)="editTheme(theme)">Edit</button>
-                  <button mat-raised-button color="warn" (click)="deleteTheme(theme)">Delete</button>
+                  <button mat-raised-button color="primary" (click)="editTheme(theme)" class="action"><mat-icon>edit</mat-icon></button>
+                  <button mat-raised-button color="warn" (click)="deleteTheme(theme)" class="action"><mat-icon>clear</mat-icon></button>
               </td>
           </tr>
       </tbody>

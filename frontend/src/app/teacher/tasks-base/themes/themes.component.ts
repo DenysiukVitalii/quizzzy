@@ -7,6 +7,8 @@ import { ThemesEditModalComponent } from './themes-edit-modal/themes-edit-modal.
 
 import { ThemeService } from './../../../_services/index';
 
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-themes',
   templateUrl: './themes.component.html',
@@ -25,6 +27,14 @@ export class ThemesComponent implements OnInit {
     this.themeService.getAll();
     
     console.log(this.themes);
+  }
+
+  ngAfterViewChecked() {
+    $(".top").css("width", $(".table").width());
+  }
+  
+  resize(){
+    $(".top").css("width", $(".table").width());
   }
 
   createTheme(): void {

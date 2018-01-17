@@ -1,0 +1,26 @@
+.container 
+    mat-form-field 
+        width: 100%;
+
+    /deep/ .mat-form-field-invalid.ng-untouched 
+        /deep/ .mat-form-field-underline .mat-input-ripple.mat-form-field-ripple 
+            background-color: #949494;
+
+        /deep/ .mat-form-field-placeholder 
+            color: #949494;
+
+        /deep/ .mat-select.mat-select-invalid .mat-select-arrow 
+            color: #949494;       
+
+    /deep/ .mat-form-field-invalid.mat-focused.ng-untouched 
+        /deep/ .mat-form-field-underline .mat-input-ripple.mat-form-field-ripple  
+            background-color: #3f51b5;
+
+        /deep/ .mat-form-field-placeholder 
+            color: #3f51b5;
+
+        /deep/ .mat-select.mat-select-invalid .mat-select-arrow 
+            color: #3f51b5;
+
+button:disabled 
+    cursor: not-allowed;

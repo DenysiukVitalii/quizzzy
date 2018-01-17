@@ -1,6 +1,6 @@
 <div class="container">
 
-    <h2 mat-dialog-title>Add task</h2>
+    <!-- <h2 mat-dialog-title>Add task</h2> -->
     <mat-dialog-content>
 
       <mat-form-field>
@@ -31,7 +31,7 @@
         <mat-icon>add</mat-icon>
       </button>
 
-      <ul>
+      <ul *ngIf="answers">
         <li *ngFor="let answer of answers; let i=index">
           <input type="checkbox" class="checkbox" [(ngModel)]="answer.isTrue" />
           <span [ngClass]="{'checked': answer.isTrue}">{{ answer.answer }}</span>

@@ -18,8 +18,8 @@
                 <td>{{i+1}}</td>
                 <td>{{discipline.name}}</td>
                 <td class="">
-                    <button mat-raised-button color="primary" (click)="editDiscipline(discipline)">Edit</button>
-                    <button mat-raised-button color="warn" (click)="deleteDiscipline(discipline)">Delete</button>
+                    <button mat-raised-button color="primary" (click)="editDiscipline(discipline)" class="action"><mat-icon>edit</mat-icon></button>
+                    <button mat-raised-button color="warn" (click)="deleteDiscipline(discipline)" class="action"><mat-icon>clear</mat-icon></button>
                 </td>
             </tr>
         </tbody>

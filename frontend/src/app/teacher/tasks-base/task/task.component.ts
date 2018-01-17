@@ -6,6 +6,9 @@ import { TaskModalComponent } from './task-modal/task-modal.component';
 
 import { TasksService } from './../../../_services/index';
 
+import * as $ from 'jquery';
+
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -25,6 +28,14 @@ export class TaskComponent implements OnInit {
     console.log(this.tasks);
   }
   
+  ngAfterViewChecked() {
+    $(".top").css("width", $(".table").width());
+  }
+  
+  resize(){
+    $(".top").css("width", $(".table").width());
+  }
+
   createTask(): void {
     const dialogRef = this.dialog.open(TaskModalComponent, {
       height: '450px',
