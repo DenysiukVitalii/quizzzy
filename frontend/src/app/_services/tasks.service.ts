@@ -38,13 +38,15 @@ export class TasksService {
           });
     }
 
-    create(theme, question, answers) {
+    create(theme, question, answers, creator, date) {
         this.success = undefined;
         // let name = task.name;
         let task = {
             id_topic: theme.id,
             question: question,
-            answers: answers
+            answers: answers,
+            creator: creator,
+            date: date
         };
 
         this.http.post(this.url + 'create_question', JSON.stringify(task), this.options)
@@ -55,7 +57,7 @@ export class TasksService {
             data.success = JSON.parse(data.success);
             this.success = data.success;
             if(data.success) { 
-                this.dataStore.tasks.push({id: data.id, question: question, topic: theme.topic, discipline: theme.discipline});
+                this.dataStore.tasks.push({id: data.id, question: question, topic: theme.topic, discipline: theme.discipline, creator: creator, date: date});
                 console.log(this.dataStore.tasks);
                 this._tasks.next(Object.assign({}, this.dataStore).tasks);
             }

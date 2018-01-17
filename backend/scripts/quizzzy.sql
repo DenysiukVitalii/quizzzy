@@ -49,9 +49,12 @@ create table questions (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
     question longtext NOT NULL,
     id_topic INT NOT NULL,
+    date date NOT NULL DEFAULT '2018-01-01',
+    creator VARCHAR(20) NOT NULL DEFAULT 'noname',
     FOREIGN KEY (id_topic) REFERENCES topics(id),
     unique(id)
 );
+
 
 insert into questions (id_topic, question) values 
 (1,'How are you?'),
@@ -91,6 +94,8 @@ create table tests (
     id_topic INT NOT NULL,
     amount_tasks INT NOT NULL,
     timer INT NOT NULL,
+    date date NOT NULL,
+    creator VARCHAR(20) NOT NULL,
     FOREIGN KEY (id_discipline) REFERENCES disciplines(id),
     FOREIGN KEY (id_topic) REFERENCES topics(id)
 );

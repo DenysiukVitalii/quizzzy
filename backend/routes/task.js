@@ -20,10 +20,12 @@ app.get('/get_tasks', async(req, res) => {
 
 app.post('/create_question', (req, res) => {
     let data = req.body;
-    console.log(data); // {id_discipline, id_topic, question, answers}
+    console.log(data); // {id_discipline, id_topic, date_creation, creator, question, answers}
     let question = {}, id_question, answers;
     question.id_topic = data.id_topic;
-    question.question = data.question; // {id_topic, question}
+    question.question = data.question;
+    question.creator = data.creator;
+    question.date = data.date; // {id_topic, question}
     answers = data.answers;
     collector.findByQuestion(question.question, function(err, rows, fields) {
         if (rows.length == 1) {
@@ -50,14 +52,22 @@ app.post('/create_question', (req, res) => {
 app.delete('/delete_question', (req, res, next) => {
     var data = req.body;
     console.log(data.id);
-    collector.deleteQuestion(data.id, function(err, info) {
+    collector.deleteAnswers(data.id, function(err, info) {
         if (err) {
             next(err);
             return res.json({ success: false });
         }
         console.log(info);
+        collector.deleteQuestion(data.id, function(err, info) {
+            if (err) {
+                next(err);
+                return res.json({ success: false });
+            }
+            console.log(info);
+        });
         res.json({ success: true });
     });
+    
 });
 
 module.exports = app;

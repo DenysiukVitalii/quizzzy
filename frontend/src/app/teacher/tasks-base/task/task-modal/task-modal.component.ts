@@ -26,6 +26,8 @@ export class TaskModalComponent implements OnInit {
   // task: any = {};
   question;
   id_topic;
+  creator;
+  date;
 
 
   constructor(
@@ -61,6 +63,12 @@ export class TaskModalComponent implements OnInit {
     this.answers.splice(index, 1);
   }
 
+  pad(number) {
+    if (number < 10) {
+      return '0' + number;
+    }
+    return number;
+  }
 
   onSelect(selected) {
     console.log(selected.id);
@@ -79,15 +87,20 @@ export class TaskModalComponent implements OnInit {
       return e; 
     });
 
+    let сurrentUser = JSON.parse(localStorage.getItem("currentUser"));   
+    this.creator = сurrentUser.username;
+    console.log(сurrentUser);
+
+    let today = new Date();
+    this.date = today.getFullYear() + "-" + this.pad(today.getMonth() + 1) + "-" + this.pad(today.getDate());
+    console.log(this.creator);
+    console.log(this.date);
     console.log(this.selectedTheme);
     console.log(this.id_topic);    
     console.log(this.question);
     console.log(this.answers);
-    this.tasksService.create(this.selectedTheme, this.question, this.answers);
-    this.selectedDiscipline = undefined;
-    this.selectedTheme = undefined;
-    this.question = '';
-    this.answers = [];
+    this.tasksService.create(this.selectedTheme, this.question, this.answers, this.creator, this.date);
+    
     this.alert();
   }
 
@@ -96,9 +109,11 @@ export class TaskModalComponent implements OnInit {
       if(this.tasksService.success !== undefined){
         clearInterval(s);
         if(this.tasksService.success){
+          this.selectedDiscipline = undefined;
+          this.selectedTheme = undefined;
+          this.question = '';
+          this.answers = [];
           success();
-          // this.addTaskForm.reset();
-          // this.checkErrors.onValueChange(this.addTaskForm, this.formErrors);
           } else {
             error();
           }

@@ -38,16 +38,19 @@ export class TestsService {
           });
     }
 
-    create(theme, question, answers) {
+    create(test, discipline, topic) {
         this.success = undefined;
-        // let name = task.name;
-        let task = {
-            id_topic: theme.id,
-            question: question,
-            answers: answers
-        };
+        
+        let test_name = test.name,
+            id_discipline = test.id_discipline,
+            id_topic = test.id_topic,
+            amount_tasks = test.amount_tasks, 
+            timer = test.timer, 
+            date = test.date, 
+            creator = test.creator;
 
-        this.http.post(this.url + 'add_test', JSON.stringify(task), this.options)
+
+        this.http.post(this.url + 'add_test', JSON.stringify(test), this.options)
         .map((response: Response) => response.json())
         .catch(this.handleError)
         .subscribe(data => {
@@ -55,7 +58,7 @@ export class TestsService {
             data.success = JSON.parse(data.success);
             this.success = data.success;
             if(data.success) { 
-                this.dataStore.tests.push({id: data.id, question: question, topic: theme.topic, discipline: theme.discipline});
+                this.dataStore.tests.push({id_test: data.id, test_name: test_name, topic: topic, discipline: discipline, id_discipline: id_discipline, id_topic: id_topic, amount_tasks: amount_tasks, timer: timer, date: date, creator: creator});
                 console.log(this.dataStore.tests);
                 this._tests.next(Object.assign({}, this.dataStore).tests);
             }

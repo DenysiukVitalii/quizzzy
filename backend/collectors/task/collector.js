@@ -35,4 +35,10 @@ collector.deleteQuestion = (id, callback) => {
     return res;
 }
 
+collector.deleteAnswers = (id, callback) => {
+    const query = queries.deleteAnswers(id);
+    const res = request.find(query, callback);
+    return res;
+}
+
 module.exports = collector;

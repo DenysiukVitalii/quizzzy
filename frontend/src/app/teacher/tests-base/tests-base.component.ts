@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { MatDialog} from '@angular/material';
+import { Router } from "@angular/router";
 
 import { TestsService } from './../../_services/index';
 
@@ -13,11 +14,12 @@ import { Observable } from 'rxjs/Observable';
 })
 export class TestsBaseComponent implements OnInit {
 
-  displayedColumns = ['#', 'Name', 'Discipline', 'Theme', 'Passings Count', 'Time', 'edit'];
+  displayedColumns = ['#', 'Name', 'Discipline', 'Theme', 'Passings Count', 'Time', 'Creator', 'Date', 'Action'];
   tests: Observable<any[]>;
 
   constructor(
     public dialog: MatDialog,
+    private router: Router,
     private testsService: TestsService
   ) { }
 
@@ -28,6 +30,10 @@ export class TestsBaseComponent implements OnInit {
     console.log(this.tests);
   }
 
+  onSelect(selected) {
+    this.router.navigate(["/teacher/test", selected.id_test]);
+  }
+  
   openDialog(): void {
     const dialogRef = this.dialog.open(TestBaseCreateModalComponent, {
       data: { name: 'Ivan' },
@@ -36,6 +42,11 @@ export class TestsBaseComponent implements OnInit {
     });
    
   }
+
+  deleteTest(test){
+    test.id = test.id_test;
+    this.testsService.delete(test);
+  } 
 }
 
 

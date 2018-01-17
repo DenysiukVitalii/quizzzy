@@ -1,22 +1,50 @@
-<div class="modal-wrap">
-  <mat-form-field class="modal-form">
-    <input class="modal-input" matInput placeholder="Test name">
-  </mat-form-field>
-  <mat-form-field class="modal-form">
-    <input class="modal-input" matInput placeholder="Theme">
-  </mat-form-field>
-  <mat-form-field class="modal-form">
-    <input class="modal-input" matInput placeholder="Question's count">
-  </mat-form-field>
-  <mat-form-field class="modal-form">
-    <input class="modal-input" matInput placeholder="Time limit">
-  </mat-form-field>
-  <div class="modal-controls">
-    <button mat-raised-button color="accent">Create</button>
-    <button 
-      mat-raised-button
-      color="primary"
-      (click)="onNoClick()">Cancel</button>
-  </div>
-</div>   
+<div class="container">
+  
+  <form [formGroup]="addTestForm" (ngSubmit)="createTest()">
+    
+      <mat-dialog-content>
+        
+        <mat-form-field class="modal-form">
+          <input class="modal-input" #input matInput placeholder="Name" formControlName="name">
+          <mat-hint align="end">{{input.value?.length || 0}}/20</mat-hint>
+          <mat-error *ngIf="formErrors.name">{{ formErrors.name }}</mat-error>
+        </mat-form-field>
 
+        <mat-form-field>
+          <mat-select placeholder="Discipline" formControlName="selectedDiscipline" (change)="onSelect($event.value)">
+            <mat-option *ngFor="let discipline of disciplines | async" [value]="discipline">
+              {{ discipline.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formErrors.selectedDiscipline">{{ formErrors.selectedDiscipline }}</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field>
+          <mat-select placeholder="Theme" formControlName="selectedTheme">
+            <mat-option *ngFor="let theme of themes | async" [value]="theme">
+              {{ theme.topic }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formErrors.selectedTheme">{{ formErrors.selectedTheme }}</mat-error>          
+        </mat-form-field>
+
+        <mat-form-field class="modal-form">
+          <input class="modal-input"  matInput type="number" placeholder="Question's count" formControlName="amount_tasks">
+          <mat-error *ngIf="formErrors.amount_tasks">{{ formErrors.amount_tasks }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="modal-form">
+          <input class="modal-input" matInput type="number" placeholder="Time limit" formControlName="timer">
+          <mat-error *ngIf="formErrors.timer">{{ formErrors.timer }}</mat-error>
+        </mat-form-field>
+    
+      </mat-dialog-content>
+    
+      <mat-dialog-actions>
+        <button mat-raised-button type="submit" color="primary" [disabled]="!addTestForm.valid">Add</button>    
+        <button mat-raised-button [mat-dialog-close]="true" color="warn">Close</button>
+      </mat-dialog-actions>
+
+  </form>
+  
+</div>

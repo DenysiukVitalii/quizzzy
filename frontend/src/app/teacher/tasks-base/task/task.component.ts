@@ -16,7 +16,7 @@ import * as $ from 'jquery';
 })
 export class TaskComponent implements OnInit {
 
-  displayedColumns = ['#', 'Discipline', 'Theme', 'Question', 'Action'];
+  displayedColumns = ['#', 'Discipline', 'Theme', 'Question', 'Creator', 'Date', 'Action'];
   tasks: Observable <any[]>;
 
   constructor(public dialog: MatDialog, private tasksService: TasksService) { }

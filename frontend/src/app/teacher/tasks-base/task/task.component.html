@@ -17,7 +17,9 @@
               <td>{{i+1}}</td>
               <td>{{task.discipline}}</td>
               <td>{{task.topic}}</td>
-              <td>{{task.question}}</td>              
+              <td>{{task.question}}</td>
+              <td>{{task.creator}}</td>
+              <td>{{task.date?.split('-').reverse().join('.')}}</td>               
               <td class="">
                   <button mat-raised-button color="warn" (click)="deleteTask(task)" class="action"><mat-icon>clear</mat-icon></button>
               </td>

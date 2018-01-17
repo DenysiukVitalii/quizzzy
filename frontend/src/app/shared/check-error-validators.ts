@@ -24,8 +24,16 @@ export class CheckErrorValidators {
         "selectedTheme": {
             "required": "Required field."
         },
-        "answer": {},
-        "completed": {}
+        "amount_tasks": {
+            "required": "Required field.",
+            "min": "Enter more number",
+            "max": "Enter less number"
+        },
+        "timer": {
+            "required": "Required field.",
+            "min": "Enter more number",
+            "max": "Enter less number"
+        }
     };
 
     onValueChange(userForm, formErrors, data?: any) {
