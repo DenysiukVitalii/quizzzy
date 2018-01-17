@@ -38,6 +38,12 @@ export class TestsService {
           });
     }
 
+    getTest(id) {
+        return this.http.get(this.url +'tests/'+ id)
+        .map((response: Response) => response.json())
+        .catch(this.handleError);
+    }
+
     create(test, discipline, topic) {
         this.success = undefined;
         
@@ -58,7 +64,7 @@ export class TestsService {
             data.success = JSON.parse(data.success);
             this.success = data.success;
             if(data.success) { 
-                this.dataStore.tests.push({id_test: data.id, test_name: test_name, topic: topic, discipline: discipline, id_discipline: id_discipline, id_topic: id_topic, amount_tasks: amount_tasks, timer: timer, date: date, creator: creator});
+                this.dataStore.tests.push({id_test: data.id, test_name: test_name, topic: topic, discipline: discipline, id_discipline: id_discipline, id_topic: id_topic, amount_tasks: data.amount, timer: timer, date: date, creator: creator});
                 console.log(this.dataStore.tests);
                 this._tests.next(Object.assign({}, this.dataStore).tests);
             }

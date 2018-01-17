@@ -11,6 +11,12 @@ collector.getTests = () => {
     return data;
 }
 
+collector.getTasksByTopicId = id => {
+    const query = queries.getTasksByTopicId(id);
+    const data = request.getData(query); 
+    return data;
+}
+
 collector.getRandTasks = (id_topic, amount_tasks) => {
     console.log(id_topic, amount_tasks);
     const data = request.getData(queries.getRandTasks(id_topic, amount_tasks));

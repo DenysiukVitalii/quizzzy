@@ -3,13 +3,19 @@ let collector = require('../collectors/test');
 
 app.get('/get_tests', async(req, res) => {
     let tests = await collector.getTests();
+    tests = tests.map(i => {
+        i.date = i.date.toISOString().split('T')[0];
+        return i;
+    });
     console.log(tests);
     res.json(tests);
 });
 
-app.post('/add_test', (req, res) => {
+app.post('/add_test', async(req, res) => {
     var data = req.body;
-    console.log(data);
+    console.log(data);    
+    let tasksByTopic = await collector.getTasksByTopicId(data.id_topic);
+    if (tasksByTopic.length < data.amount_tasks) data.amount_tasks = tasksByTopic.length;
     collector.findByTestname(data.name, function(err, rows, fields) {
         if (rows.length == 1) {
             res.json({ success: false });
@@ -21,7 +27,7 @@ app.post('/add_test', (req, res) => {
                 let tasks = await collector.getRandTasks(data.id_topic, data.amount_tasks);
                 console.log(tasks);
                 fillTest(info.insertId, tasks, res);
-                res.json({ id: info.insertId, success: true });
+                res.json({ id: info.insertId, amount: data.amount_tasks,  success: true });
             });
         };
     });
@@ -67,6 +73,7 @@ app.delete('/delete_test', (req, res, next) => {
 });
 
 app.get('/tests/:_id', async(req, res) => {
+    console.log('----------------');
     let test_tasks = await collector.getTasksByTestId(req.params._id);
     console.log(test_tasks);
     test_tasks = test_tasks.map(el => JSON.parse(el.task));
