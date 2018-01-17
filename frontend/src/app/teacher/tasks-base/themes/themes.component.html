@@ -1,55 +1,27 @@
-<div class="example-container mat-elevation-z8">
-  <div class="button-row">
-    <button mat-raised-button color="primary" (click)="openDialog()">Додати тему</button>
-  </div>
-  <div class="example-header">
-      <mat-form-field floatPlaceholder="never">
-        <input matInput #filter placeholder="Filter users">
+<div class="container">
+  <div class="top">
+      <button mat-raised-button color="primary" class="button-add" (click)="createTheme()">Add theme</button>
+
+      <mat-form-field class="search">
+          <input matInput placeholder="Search" [(ngModel)]="searchString">
       </mat-form-field>
-  </div>  
-  <mat-table #table [dataSource]="dataSource" matSort>
-      
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-  
-      <!-- ID Column -->
-      <ng-container matColumnDef="number">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> № </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.number}} </mat-cell>
-      </ng-container>
-      
-      <!-- ID Column -->
-      <ng-container matColumnDef="discipline">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Дисципліна </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.discipline}} </mat-cell>
-      </ng-container>
-
-       <!-- ID Column -->
-       <ng-container matColumnDef="theme">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Тема </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.theme}} </mat-cell>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="edit">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
-        <mat-cell *matCellDef="let row"> <a mat-raised-button routerLink="." color="primary">Edit</a> </mat-cell>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="delete">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
-        <mat-cell *matCellDef="let row"> <a mat-raised-button routerLink="." color="warn">Delete</a> </mat-cell>
-      </ng-container>
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-
-    <mat-paginator #paginator
-                  [length]="exampleDatabase.data.length"
-                  [pageIndex]="0"
-                  [pageSize]="25"
-                  [pageSizeOptions]="[5, 10, 25, 100]">
-    </mat-paginator>
+  </div>
+  <table id="datatables" class="table">
+      <thead>
+          <tr>
+              <th *ngFor="let row of displayedColumns">{{ row }}</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let theme of themes| async; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{theme.discipline}}</td>
+              <td>{{theme.topic}}</td>
+              <td class="">
+                  <button mat-raised-button color="primary" (click)="editTheme(theme)" class="action"><mat-icon>edit</mat-icon></button>
+                  <button mat-raised-button color="warn" (click)="deleteTheme(theme)" class="action"><mat-icon>clear</mat-icon></button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
 </div>

@@ -9,7 +9,9 @@ import { Router } from "@angular/router";
 export class AppComponent {
   title = 'Quizzzy';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    console.log(localStorage);
+   }
 
   onLogout(): void {
     localStorage.clear();

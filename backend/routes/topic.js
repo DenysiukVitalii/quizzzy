@@ -25,7 +25,7 @@ app.post('/create_topic', (req, res) => {
             collector.addTopic(data, function(err, info) {
                 if (err) throw err;
                 console.log(info);
-                res.json({ success: true });
+                res.json({ id: info.insertId, success: true });
             });
         };
     });

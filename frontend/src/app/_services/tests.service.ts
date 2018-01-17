@@ -7,20 +7,20 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class TasksService {
+export class TestsService {
 
-    tasks: Observable<any[]>
-    private _tasks: BehaviorSubject<any[]>;
+    tests: Observable<any[]>
+    private _tests: BehaviorSubject<any[]>;
     private dataStore: {
-        tasks: any[]
+        tests: any[]
     };
     
     success = undefined;
 
     constructor(private http: Http) {
-        this.dataStore = { tasks: [] };
-        this._tasks = <BehaviorSubject<any[]>>new BehaviorSubject([]);
-        this.tasks = this._tasks.asObservable();
+        this.dataStore = { tests: [] };
+        this._tests = <BehaviorSubject<any[]>>new BehaviorSubject([]);
+        this.tests = this._tests.asObservable();
     }
 
     headers = new Headers({"Content-Type": "application/json"});
@@ -29,27 +29,28 @@ export class TasksService {
     url = 'http://localhost:8081/';
     
     getAll() {
-        this.http.get(this.url +'get_tasks')
+        this.http.get(this.url +'get_tests')
         .map((response: Response) => response.json())
         .catch(this.handleError)
         .subscribe(data => {
-            this.dataStore.tasks = data;
-            this._tasks.next(Object.assign({}, this.dataStore).tasks);
+            this.dataStore.tests = data;
+            this._tests.next(Object.assign({}, this.dataStore).tests);
           });
     }
 
-    create(theme, question, answers, creator, date) {
+    create(test, discipline, topic) {
         this.success = undefined;
-        // let name = task.name;
-        let task = {
-            id_topic: theme.id,
-            question: question,
-            answers: answers,
-            creator: creator,
-            date: date
-        };
+        
+        let test_name = test.name,
+            id_discipline = test.id_discipline,
+            id_topic = test.id_topic,
+            amount_tasks = test.amount_tasks, 
+            timer = test.timer, 
+            date = test.date, 
+            creator = test.creator;
 
-        this.http.post(this.url + 'create_question', JSON.stringify(task), this.options)
+
+        this.http.post(this.url + 'add_test', JSON.stringify(test), this.options)
         .map((response: Response) => response.json())
         .catch(this.handleError)
         .subscribe(data => {
@@ -57,18 +58,18 @@ export class TasksService {
             data.success = JSON.parse(data.success);
             this.success = data.success;
             if(data.success) { 
-                this.dataStore.tasks.push({id: data.id, question: question, topic: theme.topic, discipline: theme.discipline, creator: creator, date: date});
-                console.log(this.dataStore.tasks);
-                this._tasks.next(Object.assign({}, this.dataStore).tasks);
+                this.dataStore.tests.push({id_test: data.id, test_name: test_name, topic: topic, discipline: discipline, id_discipline: id_discipline, id_topic: id_topic, amount_tasks: amount_tasks, timer: timer, date: date, creator: creator});
+                console.log(this.dataStore.tests);
+                this._tests.next(Object.assign({}, this.dataStore).tests);
             }
           });
     }
 
-    delete(task) {
+    delete(test) {
         this.success = undefined;
-        this.http.delete(this.url + 'delete_question', new RequestOptions({
+        this.http.delete(this.url + 'delete_test', new RequestOptions({
             headers: this.headers,
-            body: JSON.stringify(task)
+            body: JSON.stringify(test)
          }))
          .map((response: Response) => response.json())
          .catch(this.handleError)
@@ -78,8 +79,8 @@ export class TasksService {
                 data.success = JSON.parse(data.success);
                 this.success = data.success;
                 if(data.success) { 
-                    this.dataStore.tasks = this.dataStore.tasks.filter(tasks => tasks !== task);
-                    this._tasks.next(Object.assign({}, this.dataStore).tasks);
+                    this.dataStore.tests = this.dataStore.tests.filter(tests => tests !== test);
+                    this._tests.next(Object.assign({}, this.dataStore).tests);
                 } 
             });
     }

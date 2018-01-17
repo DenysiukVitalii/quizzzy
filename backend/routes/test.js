@@ -20,7 +20,7 @@ app.post('/add_test', async(req, res) => {
                 console.log(info);
                 let tasks = await collector.getRandTasks(data.id_topic, data.amount_tasks);
                 fillTest(info.insertId, tasks, res);
-                res.json({ success: true });
+                res.json({ id: info.insertId, success: true });
             });
         };
     });

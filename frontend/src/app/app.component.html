@@ -1,20 +1,19 @@
 <mat-toolbar color="primary">
     <div class="toolbar">
         <span>{{ title }}</span>
-        <a *ngIf="!(this.router.url.includes('/login') || this.router.url.includes('/register'))"
-           routerLink="/"
-           (click)="onLogout()"
-           class="mat-icon"
-        >
+        <a *ngIf="!(this.router.url.includes('/login') || this.router.url.includes('/register'))" routerLink="/" (click)="onLogout()"
+            class="mat-icon">
             logout
         </a>
     </div>
 </mat-toolbar>
 <div class="jumbotron">
     <div class="container">
-        <div class="col-sm-8 col-sm-offset-2">
-            <alert></alert>
-            <router-outlet></router-outlet>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <alert></alert>
+                <router-outlet></router-outlet>
+            </div>
         </div>
     </div>
 </div>
