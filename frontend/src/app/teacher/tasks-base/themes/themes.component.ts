@@ -19,6 +19,9 @@ export class ThemesComponent implements OnInit {
 
   displayedColumns = ['#', 'Discipline', 'Theme', 'Actions'];
   themes: Observable<any[]>;
+  page: number = 1;
+  countItems: number = 7;
+  searchString: string;
 
   constructor(public dialog: MatDialog, private themeService: ThemeService) { }
 
@@ -39,14 +42,14 @@ export class ThemesComponent implements OnInit {
 
   createTheme(): void {
     const dialogRef = this.dialog.open(ThemesModalComponent, {
-      height: '350px',
+      height: '200px',
       width: '400px',
     });
   }
 
   editTheme(theme) {
     const dialogRefEdit = this.dialog.open(ThemesEditModalComponent, {
-      height: '500px',
+      height: '150px',
       width: '400px',
       data: {
         theme: theme

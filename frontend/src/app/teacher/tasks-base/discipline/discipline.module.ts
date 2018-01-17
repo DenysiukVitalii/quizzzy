@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { SharedModule } from './../../../shared/shared.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { DisciplineComponent } from './discipline.component';
 
@@ -16,7 +17,8 @@ import { DisciplineEditModalComponent } from './discipline-edit-modal/discipline
         CommonModule,
         SharedModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxPaginationModule
     ],
     declarations: [
         DisciplineComponent,

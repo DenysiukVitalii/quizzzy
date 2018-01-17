@@ -1,7 +1,7 @@
 <div class="container">
 
     <!-- <h2 mat-dialog-title>Add task</h2> -->
-    <mat-dialog-content>
+    <!-- <mat-dialog-content> -->
 
       <mat-form-field>
         <mat-select placeholder="Discipline" [(ngModel)]="selectedDiscipline" (change)="onSelect($event.value)">
@@ -33,18 +33,20 @@
 
       <ul *ngIf="answers">
         <li *ngFor="let answer of answers; let i=index">
-          <input type="checkbox" class="checkbox" [(ngModel)]="answer.isTrue" />
-          <span [ngClass]="{'checked': answer.isTrue}">{{ answer.answer }}</span>
-          <span (click)="deleteAnswer(i)" class="delete-icon">[X]</span>
+          <!-- <input type="checkbox"   /> -->
+          <mat-checkbox class="checkbox" color="primary" [(ngModel)]="answer.isTrue"> 
+            <span [ngClass]="{'checked': answer.isTrue}">{{ answer.answer }}</span>
+            <span (click)="deleteAnswer(i)" class="delete-icon">[X]</span>
+          </mat-checkbox>
         </li>
       </ul>
 
-    </mat-dialog-content>
-    <mat-dialog-actions>
+    <!-- </mat-dialog-content>
+    <mat-dialog-actions> -->
       <!-- <button mat-raised-button color="primary" type="submit" [disabled]="!addTaskForm.valid">
         Create</button> -->
         <button mat-raised-button color="primary" (click)="createSickLeave()" >
           Create</button>
-      <button mat-raised-button color="warn" [mat-dialog-close]="true">Close</button>
-    </mat-dialog-actions>
+        <button mat-raised-button color="warn" [mat-dialog-close]="true">Close</button>
+    <!-- </mat-dialog-actions> -->
 </div>

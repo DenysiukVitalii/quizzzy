@@ -30,8 +30,4 @@ export class TestsBaseDetailsComponent implements OnInit {
     console.log(this.test);
   }
 
-  goToBack() {
-    this.router.navigate(["/phrases"]); // перенаправляем пользователя на PhraseListComponent
-  }
-
 }

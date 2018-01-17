@@ -58,8 +58,7 @@ export class CreateTestModalComponent implements OnInit {
       "name": ['', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(20),
-        Validators.pattern("[A-ZЄ-ЯҐ]{1}[a-zа-їґ]+$")
+        Validators.maxLength(20)
       ]],
       "amount_tasks": ['', [
         Validators.required,
@@ -116,9 +115,9 @@ export class CreateTestModalComponent implements OnInit {
 
   alert() {
     let s = setInterval(() => {
-      if(this.themeService.success !== undefined){
+      if(this.testsService.success !== undefined){
         clearInterval(s);
-        if(this.themeService.success){
+        if(this.testsService.success){
           success();
           this.addTestForm.reset();
           this.checkErrors.onValueChange(this.addTestForm, this.formErrors);

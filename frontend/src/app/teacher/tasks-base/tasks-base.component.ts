@@ -8,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class TasksBaseComponent implements OnInit {
 
   navLinks = [
-    { path: "task", label: "Завдання"},
-    { path: "themes", label: "Теми"},
-    { path: "discipline", label: "Дисципліни"}
+    { path: "task", label: "Tasks"},
+    { path: "themes", label: "Themes"},
+    { path: "discipline", label: "Disciplines"}
   ];
 
   constructor() { }

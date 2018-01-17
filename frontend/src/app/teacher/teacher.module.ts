@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './../shared/shared.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { routing } from './teacher.routes';
 import { TasksBaseModule } from './tasks-base/tasks-base.module';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
@@ -32,7 +33,8 @@ import { TestsBaseDetailsComponent } from './tests-base/tests-base-details/tests
         FormsModule,
         ReactiveFormsModule,
         routing,
-        TasksBaseModule
+        TasksBaseModule,
+        NgxPaginationModule
     ],
     providers: []
 })

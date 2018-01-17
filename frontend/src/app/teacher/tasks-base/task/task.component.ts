@@ -18,6 +18,9 @@ export class TaskComponent implements OnInit {
 
   displayedColumns = ['#', 'Discipline', 'Theme', 'Question', 'Creator', 'Date', 'Action'];
   tasks: Observable <any[]>;
+  page: number = 1;
+  countItems: number = 7;
+  searchString: string;
 
   constructor(public dialog: MatDialog, private tasksService: TasksService) { }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { MatDialog} from '@angular/material';
 import { Router } from "@angular/router";
 
@@ -7,6 +7,8 @@ import { TestsService } from './../../_services/index';
 import { TestBaseCreateModalComponent } from './test-base-modals/test-base-modals.component';
 import { Observable } from 'rxjs/Observable';
 
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-tests-base',
   templateUrl: './tests-base.component.html',
@@ -14,8 +16,11 @@ import { Observable } from 'rxjs/Observable';
 })
 export class TestsBaseComponent implements OnInit {
 
-  displayedColumns = ['#', 'Name', 'Discipline', 'Theme', 'Passings Count', 'Time', 'Creator', 'Date', 'Action'];
+  displayedColumns = ['#', 'Name', 'Discipline', 'Theme', 'Amount tasks', 'Time', 'Creator', 'Date', 'Action'];
   tests: Observable<any[]>;
+  page: number = 1;
+  countItems: number = 7;
+  searchString: string;
 
   constructor(
     public dialog: MatDialog,
@@ -30,14 +35,22 @@ export class TestsBaseComponent implements OnInit {
     console.log(this.tests);
   }
 
+  ngAfterViewChecked() {
+    $(".top").css("width", $(".table").width());
+  }
+  
+  resize(){
+    $(".top").css("width", $(".table").width());
+  }
+
   onSelect(selected) {
     this.router.navigate(["/teacher/test", selected.id_test]);
   }
   
   openDialog(): void {
     const dialogRef = this.dialog.open(TestBaseCreateModalComponent, {
-      data: { name: 'Ivan' },
-      height: '400px',
+      // data: { name: 'Ivan' },
+      height: '500px',
       width: '400px',
     });
    

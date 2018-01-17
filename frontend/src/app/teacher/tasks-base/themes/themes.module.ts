@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
+import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from './../../../shared/shared.module';
 
 import { ThemesComponent } from './themes.component';
@@ -14,7 +15,8 @@ import { ThemesEditModalComponent } from './themes-edit-modal/themes-edit-modal.
         CommonModule,
         SharedModule,
         FormsModule, 
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxPaginationModule
     ],
     declarations: [
         ThemesComponent,

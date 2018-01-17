@@ -14,8 +14,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let discipline of disciplines| async; let i = index">
-                <td>{{i+1}}</td>
+            <tr *ngFor="let discipline of disciplines| async | filter : searchString | paginate: { itemsPerPage: countItems, currentPage: page }; let i = index">
+                <td>{{i+1+page*countItems-countItems}}</td>
                 <td>{{discipline.name}}</td>
                 <td class="">
                     <button mat-raised-button color="primary" (click)="editDiscipline(discipline)" class="action"><mat-icon>edit</mat-icon></button>
@@ -24,4 +24,6 @@
             </tr>
         </tbody>
     </table>
+    <pagination-controls class="my-pagination" (click)="resize()" (pageChange)="page = $event"></pagination-controls>
+
 </div>

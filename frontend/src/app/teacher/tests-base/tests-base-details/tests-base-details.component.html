@@ -1,4 +1,4 @@
-<p><a [routerLink]="['/login']">Logout</a></p>
+<p><a [routerLink]="['/teacher/tests']">Go back</a></p>
 <div *ngIf="test?.length > 0" >
     <mat-card *ngFor="let task of test" >
         <h2 class="question">{{ task.question }}</h2>

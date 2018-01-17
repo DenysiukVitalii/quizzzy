@@ -13,8 +13,8 @@
           </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let theme of themes| async; let i = index">
-              <td>{{i+1}}</td>
+          <tr *ngFor="let theme of themes | async | filter : searchString  | paginate: { itemsPerPage: countItems, currentPage: page }; let i = index">
+              <td>{{i+1+page*countItems-countItems}}</td>
               <td>{{theme.discipline}}</td>
               <td>{{theme.topic}}</td>
               <td class="">
@@ -24,4 +24,6 @@
           </tr>
       </tbody>
   </table>
+  <pagination-controls class="my-pagination" (click)="resize()" (pageChange)="page = $event"></pagination-controls>
+
 </div>

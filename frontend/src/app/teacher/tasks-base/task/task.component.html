@@ -13,8 +13,8 @@
           </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let task of tasks| async; let i = index">
-              <td>{{i+1}}</td>
+          <tr *ngFor="let task of tasks | async | filter : searchString  | paginate: { itemsPerPage: countItems, currentPage: page }; let i = index">
+              <td>{{i+1+page*countItems-countItems}}</td>
               <td>{{task.discipline}}</td>
               <td>{{task.topic}}</td>
               <td>{{task.question}}</td>
@@ -26,4 +26,6 @@
           </tr>
       </tbody>
   </table>
+  <pagination-controls class="my-pagination" (click)="resize()" (pageChange)="page = $event"></pagination-controls>
+
 </div>

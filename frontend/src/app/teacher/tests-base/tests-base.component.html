@@ -11,8 +11,8 @@
           </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let test of tests| async; let i = index">
-              <td>{{i+1}}</td>
+          <tr *ngFor="let test of tests | async | filter : searchString  | paginate: { itemsPerPage: countItems, currentPage: page }; let i = index">
+              <td>{{i+1+page*countItems-countItems}}</td>
               <td>{{test.test_name}}</td>              
               <td>{{test.discipline}}</td>
               <td>{{test.topic}}</td>
@@ -21,10 +21,12 @@
               <td>{{test.creator}}</td> 
               <td>{{test.date?.split('-').reverse().join('.')}}</td>                                     
               <td class="">
-                  <button mat-raised-button color="warn" (click)="onSelect(test)" class="action" ><mat-icon>visibility</mat-icon></button>                  
+                  <button mat-raised-button color="accent" (click)="onSelect(test)" class="action" ><mat-icon>visibility</mat-icon></button>                  
                   <button mat-raised-button color="warn" (click)="deleteTest(test)" class="action"><mat-icon>clear</mat-icon></button>
               </td>
           </tr>
       </tbody>
   </table>
+  <pagination-controls class="my-pagination" (click)="resize()" (pageChange)="page = $event"></pagination-controls>
+
 </div>

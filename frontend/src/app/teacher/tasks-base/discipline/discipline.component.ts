@@ -22,6 +22,9 @@ export class DisciplineComponent implements OnInit {
 
   displayedColumns = ['#', 'Name', 'Actions'];
   disciplines: Observable<any[]>;
+  page: number = 1;
+  countItems: number = 7;
+  searchString: string;
 
   constructor( public dialog: MatDialog, private disciplineService: DisciplineService) {}
 
@@ -41,7 +44,7 @@ export class DisciplineComponent implements OnInit {
   
   editDiscipline(discipline: Discip) {
     const dialogRefEdit = this.dialog.open(DisciplineEditModalComponent, {
-      height: '350px',
+      height: '150px',
       width: '400px',
       data: {
         discipline: discipline
@@ -55,7 +58,7 @@ export class DisciplineComponent implements OnInit {
 
   createDiscipline(): void {
     const dialogRef = this.dialog.open(DisciplineModalComponent, {
-      height: '350px',
+      height: '150px',
       width: '400px',
     });
   }
