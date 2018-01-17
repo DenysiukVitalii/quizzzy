@@ -11,6 +11,12 @@ collector.getTests = () => {
     return data;
 }
 
+collector.getTasksByTopicId = id => {
+    const query = queries.getTasksByTopicId(id);
+    const data = request.getData(query); 
+    return data;
+}
+
 collector.getRandTasks = (id_topic, amount_tasks) => {
     console.log(id_topic, amount_tasks);
     const data = request.getData(queries.getRandTasks(id_topic, amount_tasks));
@@ -37,6 +43,12 @@ collector.addTestTasks = (data, callback) => {
 
 collector.deleteTest = (id, callback) => {
     const query = c_queries.delete(TABLE_TESTS, id);
+    const res = request.find(query, callback);
+    return res;
+}
+
+collector.deleteTestTasks = (id, callback) => {
+    const query = queries.deleteTestTasks(id);
     const res = request.find(query, callback);
     return res;
 }
