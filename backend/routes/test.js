@@ -7,10 +7,9 @@ app.get('/get_tests', async(req, res) => {
     res.json(tests);
 });
 
-app.post('/add_test', async(req, res) => {
+app.post('/add_test', (req, res) => {
     var data = req.body;
-    let tasksByTopic = await collector.getTasksByTopicId(data.id_topic);
-    if (tasksByTopic.length < data.amount_tasks) data.amount_tasks = tasksByTopic.length;
+    console.log(data);
     collector.findByTestname(data.name, function(err, rows, fields) {
         if (rows.length == 1) {
             res.json({ success: false });
@@ -18,7 +17,9 @@ app.post('/add_test', async(req, res) => {
             collector.addTest(data, async function(err, info) {
                 if (err) throw err;
                 console.log(info);
+                console.log(data);
                 let tasks = await collector.getRandTasks(data.id_topic, data.amount_tasks);
+                console.log(tasks);
                 fillTest(info.insertId, tasks, res);
                 res.json({ id: info.insertId, success: true });
             });
