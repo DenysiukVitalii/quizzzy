@@ -4,6 +4,10 @@ let collector = require('../collectors/statistic');
 app.post('/get_statistic', async(req, res) => {
     let data = req.body;
     let statistic = await collector.getStatisctic(data.username);
+    statistic = statistic.map(i => {
+        i.date = i.date.toISOString().split('T')[0];
+        return i;
+    });
     console.log(statistic);
     res.json(statistic);
 });

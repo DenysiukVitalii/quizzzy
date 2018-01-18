@@ -1,0 +1,22 @@
+<button routerLink="/student" mat-raised-button color="primary">Go Back</button>
+<div class="container">
+    <div class="top">
+        <h2>Statistic</h2>
+    </div>
+    <table id="datatables" class="table">
+        <thead>
+            <tr>
+                <th *ngFor="let row of displayedColumns">{{ row }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let stat of stats">
+              <td>{{ stat.name }}</td>
+              <td>{{ stat.discipline }}</td>
+              <td>{{ stat.topic }}</td>
+              <td>{{ stat.date?.split('-').reverse().join('.') }}</td>
+              <td>{{ stat.result }}</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
