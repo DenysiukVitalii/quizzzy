@@ -39,6 +39,7 @@ module.exports = {
                         where id in (select test_tasks.id_question from test_tasks
                             where test_tasks.id_test = '${id}')`,
     deleteTestTasks: (id) =>  `delete from test_tasks where id_test = '${id}'`,
+    deleteTest: (id) =>  `delete from tests where id = '${id}'`,
     getTasksByTopicId: (id) => `select questions.id from questions
                                 where questions.id_topic = '${id}'`
 }

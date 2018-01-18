@@ -1,11 +1,30 @@
-<p><a [routerLink]="['/login']">Logout</a></p>
-<div *ngIf="tasks.length > 0" class="test-container">
-    <mat-card *ngFor="let task of tasks" class="test-wrap">
-        <h2 class="question">{{ task.question }}</h2>
-        <mat-radio-group *ngIf="task.answers.length > 0" class="answers">
-            <mat-radio-button class="answer" *ngFor="let answer of task.answers">
-                {{ answer }}
-            </mat-radio-button>
-        </mat-radio-group>
-    </mat-card>
-</div>
+<h3>Hello, {{ username }}</h3>
+<button class="stats-btn" routerLink="/stats" mat-raised-button color="primary">Stats</button>
+<div class="container">
+    <div class="top">
+        <h2>Tests</h2>
+    </div>
+
+    <table id="datatables" class="table">
+        <thead>
+            <tr>
+                <th *ngFor="let row of displayedColumns">{{ row }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let test of tests let i = index">
+                <td>{{i+1}}</td>
+                <td>{{test.test_name}}</td>              
+                <td>{{test.discipline}}</td>
+                <td>{{test.topic}}</td>
+                <td>{{test.amount_tasks}}</td> 
+                <td>{{test.timer}}</td>    
+                <td>{{test.creator}}</td> 
+                <td>{{test.date?.split('-').reverse().join('.')}}</td>                                     
+                <td class="">
+                    <button mat-raised-button color="warn" routerLink="/testing/{{ test.id_test }}" class="action" ><mat-icon>visibility</mat-icon></button>                  
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>

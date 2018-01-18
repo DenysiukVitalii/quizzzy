@@ -9,12 +9,12 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class TestsService {
 
-    tests: Observable<any[]>
+    tests: Observable<any[]>;
     private _tests: BehaviorSubject<any[]>;
     private dataStore: {
         tests: any[]
     };
-    
+
     success = undefined;
 
     constructor(private http: Http) {
@@ -27,9 +27,9 @@ export class TestsService {
     options = new RequestOptions({ headers: this.headers });
 
     url = 'http://localhost:8081/';
-    
+
     getAll() {
-        this.http.get(this.url +'get_tests')
+        this.http.get(this.url + 'get_tests')
         .map((response: Response) => response.json())
         .catch(this.handleError)
         .subscribe(data => {
@@ -39,7 +39,7 @@ export class TestsService {
     }
 
     getTest(id) {
-        return this.http.get(this.url +'tests/'+ id)
+        return this.http.get(this.url + 'tests/' + id)
         .map((response: Response) => response.json())
         .catch(this.handleError);
     }
@@ -91,8 +91,17 @@ export class TestsService {
             });
     }
 
+    saveResult(result): void {
+        this.http.post(this.url + 'save_result', JSON.stringify(result), this.options).subscribe(res => console.log(res));
+    }
+
+    getStats(username): Observable<any> {
+        return this.http.post(this.url + 'get_statistic', JSON.stringify(username), this.options)
+            .map((response: Response) => response.json());
+    }
+
     private handleError(error: any) {
         console.error('Error', error);
         return Observable.throw(error.message || error);
     }
-}   
+}

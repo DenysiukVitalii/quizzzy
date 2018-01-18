@@ -42,7 +42,7 @@ collector.addTestTasks = (data, callback) => {
 }
 
 collector.deleteTest = (id, callback) => {
-    const query = c_queries.delete(TABLE_TESTS, id);
+    const query = queries.deleteTest(id);
     const res = request.find(query, callback);
     return res;
 }

@@ -13,7 +13,6 @@ app.get('/get_tests', async(req, res) => {
 
 app.post('/add_test', async(req, res) => {
     var data = req.body;
-    console.log(data);    
     let tasksByTopic = await collector.getTasksByTopicId(data.id_topic);
     if (tasksByTopic.length < data.amount_tasks) data.amount_tasks = tasksByTopic.length;
     collector.findByTestname(data.name, function(err, rows, fields) {
@@ -60,10 +59,7 @@ app.delete('/delete_test', (req, res, next) => {
             return res.json({ success: false });
         }
         collector.deleteTest(data.id, function(err, info) {
-            if (err) {
-                next(err);
-                return res.json({ success: false });
-            }
+            if (err) return err;
             console.log(info);
         });
         console.log(info);
@@ -73,7 +69,6 @@ app.delete('/delete_test', (req, res, next) => {
 });
 
 app.get('/tests/:_id', async(req, res) => {
-    console.log('----------------');
     let test_tasks = await collector.getTasksByTestId(req.params._id);
     console.log(test_tasks);
     test_tasks = test_tasks.map(el => JSON.parse(el.task));

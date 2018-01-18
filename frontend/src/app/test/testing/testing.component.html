@@ -1,0 +1,22 @@
+<a routerLink="/student">Go back</a>
+<div class="container">
+  <div *ngIf="questions.length > 0" class="test-wrap">
+    <ul class="test">
+      <li class="test-item" *ngFor="let quest of questions">
+        <p class="question">{{ quest.question }}</p>
+        <div class="answers" *ngIf="quest.answers.length > 0">
+          
+          <div class="checkboxes-wrap" *ngFor="let answ of quest.answers">
+            <mat-checkbox
+              [(ngModel)]="answ.checked"
+            >
+              {{ answ.answer }}
+            </mat-checkbox>
+          </div>
+
+        </div>
+      </li>
+    </ul>
+    <button mat-raised-button color="primary" (click)="onAcceptTest()">Accept</button>
+  </div>
+</div>
