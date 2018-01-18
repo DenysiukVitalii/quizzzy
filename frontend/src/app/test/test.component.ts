@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { TestService } from './test.service';
+import { Observable } from 'rxjs/Observable';
+import { TestsService } from './../_services/tests.service';
 
 @Component({
   selector: 'app-test',
@@ -9,19 +9,18 @@ import { TestService } from './test.service';
   styleUrls: ['./test.component.sass']
 })
 export class TestComponent implements OnInit {
+  tests = [];
+  searchString = '';
+  displayedColumns = ['#', 'Name', 'Discipline', 'Theme', 'Passings Count', 'Time', 'Creator', 'Date', 'Action'];
+  username: string;
 
-  tasks = [];
-
-  constructor(private router: Router, private testService: TestService) { }
+  constructor(public router: Router, public testsService: TestsService) { }
 
   ngOnInit() {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
-    if (currentUser.role !== 'student') {
-      this.router.navigate(['/teacher']);
-    }
-
-    this.tasks = this.testService.getTasks();
+    this.testsService.getAll();
+    this.testsService.tests.subscribe(res => this.tests = res);
+    this.username = JSON.parse(localStorage.getItem('currentUser')).username;
   }
+
 
 }

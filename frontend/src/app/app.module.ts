@@ -16,12 +16,16 @@ import { routing } from './app.routing';
 
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService, 
-         UserService, DisciplineService, ThemeService, TasksService, TestsService } from './_services/index';
-import { TestComponent, TestService } from './test/index';
+import { AlertService, AuthenticationService, UserService, DisciplineService,
+         ThemeService, TasksService, TestsService } from './_services/index';
+import { TestComponent } from './test/test.component';
+import { TestingComponent } from './test/testing/testing.component';
+import { TestService } from './test/test.service';
 import { LoginComponent } from './login/index';
 import { SignupComponent } from './signup/index';
 import { TeacherPipe } from './_pipes/teacher.pipe';
+import { ShowResultModalComponent } from './test/testing/show-result-modal/show-result-modal';
+import { StatsComponent } from './test/stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,9 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     LoginComponent,
     SignupComponent,
     TeacherPipe,
+    TestingComponent,
+    ShowResultModalComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +46,7 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     routing,
     SharedModule,
     NoConflictStyleCompatibilityMode,
-    TeacherModule
+    TeacherModule,
   ],
   providers: [
     TestService,
@@ -55,6 +62,7 @@ import { TeacherPipe } from './_pipes/teacher.pipe';
     // fakeBackendProvider,
     MockBackend,
     BaseRequestOptions],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ ShowResultModalComponent ]
 })
 export class AppModule { }

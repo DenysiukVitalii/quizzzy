@@ -22,7 +22,9 @@ app.post('/add_test', async(req, res) => {
             collector.addTest(data, async function(err, info) {
                 if (err) throw err;
                 console.log(info);
+                console.log(data);
                 let tasks = await collector.getRandTasks(data.id_topic, data.amount_tasks);
+                console.log(tasks);
                 fillTest(info.insertId, tasks, res);
                 res.json({ id: info.insertId, amount: data.amount_tasks,  success: true });
             });
@@ -67,7 +69,6 @@ app.delete('/delete_test', (req, res, next) => {
 });
 
 app.get('/tests/:_id', async(req, res) => {
-    console.log('----------------');
     let test_tasks = await collector.getTasksByTestId(req.params._id);
     console.log(test_tasks);
     test_tasks = test_tasks.map(el => JSON.parse(el.task));

@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
                         this.returnUrl = '/teacher';
                         this.router.navigate([this.returnUrl]);
                     } else {
+                        this.returnUrl = '/student';
                         this.router.navigate([this.returnUrl]);
                     }
                 },
