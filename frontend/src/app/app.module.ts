@@ -13,6 +13,7 @@ import { BaseRequestOptions } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
@@ -47,6 +48,7 @@ import { StatsComponent } from './test/stats/stats.component';
     SharedModule,
     NoConflictStyleCompatibilityMode,
     TeacherModule,
+    NgxPaginationModule
   ],
   providers: [
     TestService,

@@ -3,6 +3,9 @@
 <div class="container">
     <div class="top">
         <h2>Tests</h2>
+        <mat-form-field class="search">
+                <input matInput placeholder="Search" [(ngModel)]="searchString">
+        </mat-form-field>
     </div>
 
     <table id="datatables" class="table">
@@ -12,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let test of tests let i = index">
+            <tr *ngFor="let test of tests | filter : searchString  | paginate: { itemsPerPage: countItems, currentPage: page }; let i = index">
                 <td>{{i+1}}</td>
                 <td>{{test.test_name}}</td>              
                 <td>{{test.discipline}}</td>
@@ -27,4 +30,6 @@
             </tr>
         </tbody>
     </table>
+    <pagination-controls class="my-pagination" (click)="resize()" (pageChange)="page = $event"></pagination-controls>
+
   </div>

@@ -67,13 +67,20 @@ export class TestingComponent implements OnInit {
 
   sendResult(): any {
     const username = JSON.parse(localStorage.getItem('currentUser')).username;
-
+    let today = new Date();
+    let da = today.getFullYear() + "-" + this.pad(today.getMonth() + 1) + "-" + this.pad(today.getDate());
     return {
       username: username,
       id_test: this.id,
       result: this.succesRate,
-      date: new Date().getFullYear() + '-' + new Date().getMonth() + 1 + '-' + new Date().getDay()
+      date: da
     };
   }
 
+  pad(number) {
+    if (number < 10) {
+      return '0' + number;
+    }
+    return number;
+  }
 }

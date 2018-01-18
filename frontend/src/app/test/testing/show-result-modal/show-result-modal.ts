@@ -21,4 +21,7 @@ export class ShowResultModalComponent implements OnInit {
   ngOnInit() {
   }
 
+  closed() {
+    this.dialogRef.close();
+  }
 }
