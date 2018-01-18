@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { TestsService } from '../../_services/index';
 import { Router } from "@angular/router";
+
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-stats',
@@ -10,6 +12,9 @@ import { Router } from "@angular/router";
 export class StatsComponent implements OnInit {
   displayedColumns = ['Name', 'Discipline', 'Topic', 'Date', 'Result'];
   stats: any;
+  page: number = 1;
+  countItems: number = 7;
+  searchString: string;
 
   constructor(public testsService: TestsService) { }
 
@@ -22,6 +27,14 @@ export class StatsComponent implements OnInit {
 
   getStats(username): void {
     this.testsService.getStats(username).subscribe(res => this.stats = res);
+  }
+
+  ngAfterViewChecked() {
+    $(".top").css("width", $(".table").width());
+  }
+  
+  resize(){
+    $(".top").css("width", $(".table").width());
   }
 
 }

@@ -2,6 +2,9 @@
 <div class="container">
     <div class="top">
         <h2>Statistic</h2>
+        <mat-form-field class="search">
+                <input matInput placeholder="Search" [(ngModel)]="searchString">
+        </mat-form-field>
     </div>
     <table id="datatables" class="table">
         <thead>
@@ -10,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let stat of stats">
+            <tr *ngFor="let stat of stats | filter : searchString  | paginate: { itemsPerPage: countItems, currentPage: page }">
               <td>{{ stat.name }}</td>
               <td>{{ stat.discipline }}</td>
               <td>{{ stat.topic }}</td>
@@ -19,4 +22,6 @@
             </tr>
         </tbody>
     </table>
+    <pagination-controls class="my-pagination" (click)="resize()" (pageChange)="page = $event"></pagination-controls>
+
   </div>

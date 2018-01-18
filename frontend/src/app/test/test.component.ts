@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { TestsService } from './../_services/tests.service';
+
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-test',
@@ -10,9 +12,11 @@ import { TestsService } from './../_services/tests.service';
 })
 export class TestComponent implements OnInit {
   tests = [];
-  searchString = '';
   displayedColumns = ['#', 'Name', 'Discipline', 'Theme', 'Passings Count', 'Time', 'Creator', 'Date', 'Action'];
   username: string;
+  page: number = 1;
+  countItems: number = 7;
+  searchString: string;
 
   constructor(public router: Router, public testsService: TestsService) { }
 
@@ -22,5 +26,12 @@ export class TestComponent implements OnInit {
     this.username = JSON.parse(localStorage.getItem('currentUser')).username;
   }
 
+  ngAfterViewChecked() {
+    $(".top").css("width", $(".table").width());
+  }
+  
+  resize(){
+    $(".top").css("width", $(".table").width());
+  }
 
 }
