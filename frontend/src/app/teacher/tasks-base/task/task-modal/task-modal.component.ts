@@ -109,8 +109,8 @@ export class TaskModalComponent implements OnInit {
       if(this.tasksService.success !== undefined){
         clearInterval(s);
         if(this.tasksService.success){
-          this.selectedDiscipline = undefined;
-          this.selectedTheme = undefined;
+          // this.selectedDiscipline = undefined;
+          // this.selectedTheme = undefined;
           this.question = '';
           this.answers = [];
           success();
