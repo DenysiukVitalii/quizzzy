@@ -1,17 +1,32 @@
-<h2 mat-dialog-title>Add themes</h2>
-<mat-dialog-content>
-  <mat-form-field>
-      <mat-select placeholder="Discipline">
-        <mat-option *ngFor="let discipline of disciplines" [value]="discipline.value">
-          {{ discipline.viewValue }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  <mat-form-field class="modal-form">
-      <input class="modal-input" matInput placeholder="Themes name">
-    </mat-form-field>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="true">Create</button>    
-  <button mat-button mat-dialog-close>Cancel</button>
-</mat-dialog-actions>
+<div class="container">
+  
+  <form [formGroup]="addThemeForm" (ngSubmit)="createTheme()">
+    
+      <!-- <h2 mat-dialog-title>Add theme</h2> -->
+      <mat-dialog-content>
+    
+        <mat-form-field>
+          <mat-select placeholder="Discipline" formControlName="selectedDiscipline">
+            <mat-option *ngFor="let discipline of disciplines | async" [value]="discipline">
+              {{ discipline.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formErrors.selectedDiscipline">{{ formErrors.selectedDiscipline }}</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="modal-form">
+          <input class="modal-input" #input matInput placeholder="Name" formControlName="name">
+          <mat-hint align="end">{{input.value?.length || 0}}/20</mat-hint>
+          <mat-error *ngIf="formErrors.name">{{ formErrors.name }}</mat-error>
+        </mat-form-field>
+    
+      </mat-dialog-content>
+    
+      <mat-dialog-actions>
+        <button mat-raised-button type="submit" color="primary" [disabled]="!addThemeForm.valid">Add</button>    
+        <button mat-raised-button [mat-dialog-close]="true" color="warn">Close</button>
+      </mat-dialog-actions>
+
+  </form>
+  
+</div>

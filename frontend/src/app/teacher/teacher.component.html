@@ -1,8 +1,7 @@
-<p><a [routerLink]="['/login']">Logout</a></p>
-<h2 class="welcome">Teacher Name</h2>
+<h2 class="welcome">Hello, {{teacher}}!</h2>
 <div class="controls">
     <div class="nav-controls">
-        <button [routerLink]="['students']" mat-raised-button color="primary">Students</button>
+        <!-- <button [routerLink]="['students']" mat-raised-button color="primary">Students</button> -->
         <button [routerLink]="['tasks']" mat-raised-button color="primary">Tasks</button>
     </div>
     <button class="create-test-btn" mat-raised-button color="accent" (click)="openDialog()">Create test</button>

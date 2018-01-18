@@ -3,6 +3,10 @@ let collector = require('../collectors/test');
 
 app.get('/get_tests', async(req, res) => {
     let tests = await collector.getTests();
+    tests = tests.map(i => {
+        i.date = i.date.toISOString().split('T')[0];
+        return i;
+    });
     console.log(tests);
     res.json(tests);
 });
@@ -18,9 +22,11 @@ app.post('/add_test', async(req, res) => {
             collector.addTest(data, async function(err, info) {
                 if (err) throw err;
                 console.log(info);
+                console.log(data);
                 let tasks = await collector.getRandTasks(data.id_topic, data.amount_tasks);
+                console.log(tasks);
                 fillTest(info.insertId, tasks, res);
-                res.json({ success: true });
+                res.json({ id: info.insertId, amount: data.amount_tasks,  success: true });
             });
         };
     });
@@ -53,10 +59,7 @@ app.delete('/delete_test', (req, res, next) => {
             return res.json({ success: false });
         }
         collector.deleteTest(data.id, function(err, info) {
-            if (err) {
-                next(err);
-                return res.json({ success: false });
-            }
+            if (err) return err;
             console.log(info);
         });
         console.log(info);
