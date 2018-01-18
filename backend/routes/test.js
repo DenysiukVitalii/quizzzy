@@ -57,10 +57,7 @@ app.delete('/delete_test', (req, res, next) => {
             return res.json({ success: false });
         }
         collector.deleteTest(data.id, function(err, info) {
-            if (err) {
-                next(err);
-                return res.json({ success: false });
-            }
+            if (err) return err;
             console.log(info);
         });
         console.log(info);

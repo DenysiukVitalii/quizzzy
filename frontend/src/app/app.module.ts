@@ -16,7 +16,8 @@ import { routing } from './app.routing';
 
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService, UserService, DisciplineService, ThemeService, TasksService, TestsService } from './_services/index';
+import { AlertService, AuthenticationService, 
+         UserService, DisciplineService, ThemeService, TasksService, TestsService } from './_services/index';
 import { TestComponent, TestService } from './test/index';
 import { LoginComponent } from './login/index';
 import { SignupComponent } from './signup/index';
