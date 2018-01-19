@@ -15,7 +15,7 @@ export class ShowResultModalComponent implements OnInit {
     public dialogRef: MatDialogRef<ShowResultModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
-    this.passingResult = this.data.isSucces ? 'Succes :)' : 'You failed the test :(';
+    this.passingResult = 'Your result:';
   }
 
   ngOnInit() {

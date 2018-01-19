@@ -48,8 +48,8 @@ export class DisciplineModalComponent implements OnInit {
       "name": ['', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(20),
-        Validators.pattern("[A-ZЄ-ЯҐ]{1}[A-Za-zЄ-ЯҐа-їґ\s]+$")
+        Validators.maxLength(50),
+       // Validators.pattern("[A-ZЄ-ЯҐ]{1}[A-Za-zЄ-ЯҐа-їґ\s]+$")
       ]]
     });
 
