@@ -51,8 +51,8 @@ export class ThemesModalComponent implements OnInit {
       "name": ['', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(20),
-        Validators.pattern("[A-ZЄ-ЯҐ]{1}[a-zа-їґ]+$")
+        Validators.maxLength(50),
+       // Validators.pattern("[A-ZЄ-ЯҐ]{1}[a-zа-їґ]+$")
       ]]
     });
 
